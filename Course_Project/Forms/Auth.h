@@ -1,5 +1,6 @@
 #pragma once
-#include "Main_User.h"
+
+#include "Main.h"
 
 namespace CourseProject {
 
@@ -39,12 +40,6 @@ namespace CourseProject {
 	private: System::Windows::Forms::TextBox^ Login_Input;
 	private: System::Windows::Forms::Label^ Text_Label;
 	private: System::Windows::Forms::Button^ Sign_Up_Button;
-
-	protected:
-
-	protected:
-
-	protected:
 
 	private:
 		/// <summary>
@@ -160,10 +155,10 @@ namespace CourseProject {
 #pragma endregion
 
 
-private: System::Void Sign_In_Button_Click(System::Object^ sender, System::EventArgs^ e) {
-	Main_User^ MainUser = gcnew Main_User();
-	MainUser->Show();
-	this->Hide();
-}
+	private: System::Void Sign_In_Button_Click(System::Object^ sender, System::EventArgs^ e) {
+		Main^ MainForm = gcnew Main();
+		MainForm->Show();
+		this->Hide();
+	}
 };
 }

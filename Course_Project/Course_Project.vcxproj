@@ -123,14 +123,18 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Forms\Auth.cpp" />
-    <ClCompile Include="Forms\Main_User.cpp" />
+    <ClCompile Include="Forms\Main.cpp" />
+    <ClCompile Include="Forms\Text_For_Test.cpp" />
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Forms\Auth.h">
       <FileType>CppForm</FileType>
     </ClInclude>
-    <ClInclude Include="Forms\Main_User.h">
+    <ClInclude Include="Forms\Main.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="Forms\Text_For_Test.h">
       <FileType>CppForm</FileType>
     </ClInclude>
   </ItemGroup>
@@ -138,8 +142,11 @@
     <EmbeddedResource Include="Forms\Auth.resx">
       <DependentUpon>Forms\Auth.h</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Main_User.resx">
-      <DependentUpon>Forms\Main_User.h</DependentUpon>
+    <EmbeddedResource Include="Forms\Main.resx">
+      <DependentUpon>Forms\Main.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Text_For_Test.resx">
+      <DependentUpon>Forms\Text_For_Test.h</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

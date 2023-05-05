@@ -21,7 +21,10 @@
     <ClCompile Include="Forms\Auth.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Forms\Main_User.cpp">
+    <ClCompile Include="Forms\Main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Forms\Text_For_Test.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -29,7 +32,10 @@
     <ClInclude Include="Forms\Auth.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Forms\Main_User.h">
+    <ClInclude Include="Forms\Main.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Forms\Text_For_Test.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
