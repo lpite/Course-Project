@@ -1,3 +1,7 @@
+#include "Text_For_Test.h"
+#include "Test.h"
+
+
 #pragma once
 
 namespace CourseProject {
@@ -10,7 +14,7 @@ namespace CourseProject {
 	using namespace System::Drawing;
 
 	/// <summary>
-	/// Summary for Main_User
+	/// Summary for Main
 	/// </summary>
 	public ref class Main : public System::Windows::Forms::Form
 	{
@@ -73,6 +77,7 @@ namespace CourseProject {
 			this->To_Test_Button->TabIndex = 0;
 			this->To_Test_Button->Text = L"Go to test";
 			this->To_Test_Button->UseVisualStyleBackColor = true;
+			this->To_Test_Button->Click += gcnew System::EventHandler(this, &Main::To_Test_Button_Click);
 			// 
 			// Greeting_Label
 			// 
@@ -87,14 +92,15 @@ namespace CourseProject {
 			// 
 			// Read_Text_Button
 			// 
-			this->Read_Text_Button->Location = System::Drawing::Point(12, 91);
+			this->Read_Text_Button->Location = System::Drawing::Point(12, 89);
 			this->Read_Text_Button->Name = L"Read_Text_Button";
 			this->Read_Text_Button->Size = System::Drawing::Size(90, 34);
 			this->Read_Text_Button->TabIndex = 2;
 			this->Read_Text_Button->Text = L"Read Text";
 			this->Read_Text_Button->UseVisualStyleBackColor = true;
+			this->Read_Text_Button->Click += gcnew System::EventHandler(this, &Main::Read_Text_Button_Click);
 			// 
-			// Main_User
+			// Main
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
@@ -102,8 +108,9 @@ namespace CourseProject {
 			this->Controls->Add(this->Read_Text_Button);
 			this->Controls->Add(this->Greeting_Label);
 			this->Controls->Add(this->To_Test_Button);
-			this->Name = L"Main_User";
-			this->Text = L"Main_User";
+			this->Name = L"Main";
+			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
+			this->Text = L"Main";
 			this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &Main::Main_User_FormClosing);
 			this->ResumeLayout(false);
 			this->PerformLayout();
@@ -113,5 +120,15 @@ namespace CourseProject {
 	private: System::Void Main_User_FormClosing(System::Object^ sender, System::Windows::Forms::FormClosingEventArgs^ e) {
 		Application::Exit();
 	}
-	};
+	private: System::Void Read_Text_Button_Click(System::Object^ sender, System::EventArgs^ e) {
+		Text_For_Test^ Text_Form = gcnew Text_For_Test();
+		Text_Form->Show();
+		
+	}
+	private: System::Void To_Test_Button_Click(System::Object^ sender, System::EventArgs^ e) {
+		Test^ Test_Form = gcnew Test();
+		Test_Form->ShowDialog();
+	}
+	
+};
 }

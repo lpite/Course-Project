@@ -82,7 +82,7 @@
       <LanguageStandard>stdcpp14</LanguageStandard>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <EntryPointSymbol>main</EntryPointSymbol>
       <AdditionalDependencies />
     </Link>
@@ -124,6 +124,7 @@
   <ItemGroup>
     <ClCompile Include="Forms\Auth.cpp" />
     <ClCompile Include="Forms\Main.cpp" />
+    <ClCompile Include="Forms\Test.cpp" />
     <ClCompile Include="Forms\Text_For_Test.cpp" />
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
@@ -132,6 +133,9 @@
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="Forms\Main.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="Forms\Test.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="Forms\Text_For_Test.h">
@@ -144,6 +148,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Main.resx">
       <DependentUpon>Forms\Main.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Test.resx">
+      <DependentUpon>Forms\Test.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Text_For_Test.resx">
       <DependentUpon>Forms\Text_For_Test.h</DependentUpon>

@@ -130,7 +130,7 @@ namespace CourseProject {
 			this->Sign_Up_Button->Name = L"Sign_Up_Button";
 			this->Sign_Up_Button->Size = System::Drawing::Size(100, 45);
 			this->Sign_Up_Button->TabIndex = 4;
-			this->Sign_Up_Button->Text = L"Sign In";
+			this->Sign_Up_Button->Text = L"Sign Up";
 			this->Sign_Up_Button->UseVisualStyleBackColor = false;
 			// 
 			// Auth
@@ -147,13 +147,13 @@ namespace CourseProject {
 				static_cast<System::Byte>(0)));
 			this->Margin = System::Windows::Forms::Padding(6);
 			this->Name = L"Auth";
+			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Auth";
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
 		}
 #pragma endregion
-
 
 	private: System::Void Sign_In_Button_Click(System::Object^ sender, System::EventArgs^ e) {
 		Main^ MainForm = gcnew Main();

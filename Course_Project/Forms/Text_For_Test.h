@@ -82,12 +82,13 @@ namespace CourseProject {
 			// 
 			// Save_Information_Button
 			// 
-			this->Save_Information_Button->Location = System::Drawing::Point(246, 312);
+			this->Save_Information_Button->Location = System::Drawing::Point(218, 312);
 			this->Save_Information_Button->Name = L"Save_Information_Button";
 			this->Save_Information_Button->Size = System::Drawing::Size(96, 37);
 			this->Save_Information_Button->TabIndex = 2;
 			this->Save_Information_Button->Text = L"Save";
 			this->Save_Information_Button->UseVisualStyleBackColor = true;
+			this->Save_Information_Button->Click += gcnew System::EventHandler(this, &Text_For_Test::Save_Information_Button_Click);
 			// 
 			// Text_For_Test
 			// 
@@ -98,11 +99,15 @@ namespace CourseProject {
 			this->Controls->Add(this->Information_TextBox);
 			this->Controls->Add(this->Information_Label);
 			this->Name = L"Text_For_Test";
+			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Text_For_Test";
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
 		}
 #pragma endregion
+	private: System::Void Save_Information_Button_Click(System::Object^ sender, System::EventArgs^ e) {
+		this->Hide();
+	}
 	};
 }
