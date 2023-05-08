@@ -12,28 +12,31 @@ auto storage = make_storage(
 	"test.db",
 	make_unique_index("idx_user_login", &User::USER::login, &User::USER::login),
 	make_table("user",
-		make_column("ID", &User::USER::id, primary_key()),
+		make_column("ID", &User::USER::id, primary_key().autoincrement()),
 		make_column("login", &User::USER::login),
 		make_column("password", &User::USER::password),
-		make_column("is_admin", &User::USER::is_admin)));
+		make_column("is_admin", &User::USER::is_admin)),
+	make_table("current_user",
+		make_column("login", &User::CURRENT_USER::login),
+		make_column("is_admin", &User::CURRENT_USER::is_admin))
+);
 
 
 int User::SignUp(std::string login, std::string password)
 {
 	storage.sync_schema();
 
-	User::USER test{
+	User::USER user{
 		-1,
 		login,
 		password,
 		0
 	};
 	try {
-		storage.insert(test);
-		
+		storage.insert(user);
 	}
 	catch (const std::system_error& e) {
-		//cout << e.what() << endl;
+		std::cout << e.what() << std::endl;
 		return 1;
 	}
 	return 0;
@@ -48,9 +51,17 @@ int User::SignIn(std::string login, std::string password)
 		std::cout << "notJohn count = " << user.size() << std::endl;
 		if (user.size())
 		{
-			std::cout << "paul = " << storage.dump(user[0]) << std::endl;
+			User::CURRENT_USER current_user{
+				user[0].login,
+				user[0].is_admin,
+			};
+			storage.remove_all<User::CURRENT_USER>();
+			storage.insert(current_user);
+
+			std::cout << "user = " << storage.dump(user[0]) << std::endl;
+			return 0;
 		}
-		return 0;
+		return 1;
 
 	}
 	catch (const std::system_error& e)
@@ -61,9 +72,13 @@ int User::SignIn(std::string login, std::string password)
 
 }
 
-std::vector<User::USER, std::allocator<User::USER>> User::GetCurrent()
+std::vector<User::CURRENT_USER, std::allocator<User::CURRENT_USER>> User::GetCurrent()
 {
-
+		auto current_user = storage.get_all<User::CURRENT_USER>();
+		if (current_user.size())
+		{
+			return current_user;
+		}
 }
 
 
