@@ -1,5 +1,4 @@
 #pragma once
-#include <sqlite_orm/sqlite_orm.h>
 #include <string>
 #include <iostream>
 #include <stdlib.h>
@@ -17,10 +16,8 @@ namespace CourseProject {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
-	using namespace sqlite_orm;
 	using namespace std;
 	using namespace msclr::interop;
-	using namespace User;
 
 	/// <summary>
 	/// Summary for Auth
@@ -161,38 +158,43 @@ namespace CourseProject {
 			this->Name = L"Auth";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Auth";
-			this->Load += gcnew System::EventHandler(this, &Auth::Auth_Load);
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
 		}
 #pragma endregion
 	
-	private: System::Void Auth_Load(System::Object^ sender, System::EventArgs^ e) {
-	
-	}
-	
 	private: System::Void Sign_In_Button_Click(System::Object^ sender, System::EventArgs^ e) {
 		string Login = marshal_as<string>(Login_Input->Text);
 		string Password = marshal_as<string>(Password_Input->Text);
-		if (User::SignIn(Login, Password)) {
+		
+		if (Login.length() && Password.length())
+		{
+			if (User::SignIn(Login, Password)) {
+					MessageBox::Show("The login or password is incorrect");
+			}
+			else {
 				Main^ MainForm = gcnew Main();
 				MainForm->Show();
 				this->Hide();
+			};
+		}else {
+			MessageBox::Show("Enter login or password");
 		}
-		else {
-			MessageBox::Show("The login or password is incorrect");
-		};
 	}
 	
 	private: System::Void Sign_Up_Button_Click(System::Object^ sender, System::EventArgs^ e) {
 
 		string Login = marshal_as<string>(Login_Input->Text);
 		string Password = marshal_as<string>(Password_Input->Text);
-
-		if (User::SignUp(Login, Password))
-		{
-			MessageBox::Show("Shit");
+		if (Login.length() && Password.length()){
+			if (User::SignUp(Login, Password))
+			{
+				MessageBox::Show("Something went wrong");
+			}
+		}
+		else {
+			MessageBox::Show("Enter login or password");
 		}
 	}
 };
