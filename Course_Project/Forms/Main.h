@@ -1,8 +1,14 @@
+#pragma once
+#include <string>
+#include <iostream>
+#include <stdlib.h>
+#include <msclr\marshal_cppstd.h>
+
+#include "../Auth/User.h"
+
 #include "Text_For_Test.h"
 #include "Test.h"
 
-
-#pragma once
 
 namespace CourseProject {
 
@@ -12,6 +18,7 @@ namespace CourseProject {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace msclr::interop;
 
 	/// <summary>
 	/// Summary for Main
@@ -22,9 +29,6 @@ namespace CourseProject {
 		Main(void)
 		{
 			InitializeComponent();
-			//
-			//TODO: Add the constructor code here
-			//
 		}
 
 	protected:
@@ -43,6 +47,9 @@ namespace CourseProject {
 
 	private: System::Windows::Forms::Label^ Greeting_Label;
 	private: System::Windows::Forms::Button^ Read_Text_Button;
+	private: System::Windows::Forms::Button^ History_Button;
+
+
 
 
 	protected:
@@ -67,6 +74,7 @@ namespace CourseProject {
 			this->To_Test_Button = (gcnew System::Windows::Forms::Button());
 			this->Greeting_Label = (gcnew System::Windows::Forms::Label());
 			this->Read_Text_Button = (gcnew System::Windows::Forms::Button());
+			this->History_Button = (gcnew System::Windows::Forms::Button());
 			this->SuspendLayout();
 			// 
 			// To_Test_Button
@@ -100,11 +108,22 @@ namespace CourseProject {
 			this->Read_Text_Button->UseVisualStyleBackColor = true;
 			this->Read_Text_Button->Click += gcnew System::EventHandler(this, &Main::Read_Text_Button_Click);
 			// 
+			// History_Button
+			// 
+			this->History_Button->Location = System::Drawing::Point(12, 198);
+			this->History_Button->Name = L"History_Button";
+			this->History_Button->Size = System::Drawing::Size(90, 34);
+			this->History_Button->TabIndex = 3;
+			this->History_Button->Text = L"History";
+			this->History_Button->UseVisualStyleBackColor = true;
+			this->History_Button->Visible = false;
+			// 
 			// Main
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(784, 561);
+			this->Controls->Add(this->History_Button);
 			this->Controls->Add(this->Read_Text_Button);
 			this->Controls->Add(this->Greeting_Label);
 			this->Controls->Add(this->To_Test_Button);
@@ -112,19 +131,32 @@ namespace CourseProject {
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Main";
 			this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &Main::Main_User_FormClosing);
+			this->Load += gcnew System::EventHandler(this, &Main::Main_Load);
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
 		}
 #pragma endregion
+	private: System::Void Main_Load(System::Object^ sender, System::EventArgs^ e) {
+		
+		auto user = User::GetCurrent()[0];
+		Greeting_Label->Text = "Hello " + marshal_as<String^>(user.login);
+		if (user.is_admin)
+		{
+			History_Button->Visible = TRUE;
+		}
+	}
+
 	private: System::Void Main_User_FormClosing(System::Object^ sender, System::Windows::Forms::FormClosingEventArgs^ e) {
 		Application::Exit();
 	}
+
 	private: System::Void Read_Text_Button_Click(System::Object^ sender, System::EventArgs^ e) {
 		Text_For_Test^ Text_Form = gcnew Text_For_Test();
 		Text_Form->Show();
 		
 	}
+
 	private: System::Void To_Test_Button_Click(System::Object^ sender, System::EventArgs^ e) {
 		Test^ Test_Form = gcnew Test();
 		Test_Form->ShowDialog();
