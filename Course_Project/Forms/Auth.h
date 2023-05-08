@@ -173,13 +173,16 @@ namespace CourseProject {
 	}
 	
 	private: System::Void Sign_In_Button_Click(System::Object^ sender, System::EventArgs^ e) {
-	/*	Main^ MainForm = gcnew Main();
-		MainForm->Show();
-		this->Hide();*/
 		string Login = marshal_as<string>(Login_Input->Text);
 		string Password = marshal_as<string>(Password_Input->Text);
-		User::SignIn(Login, Password);
-		
+		if (User::SignIn(Login, Password)) {
+				Main^ MainForm = gcnew Main();
+				MainForm->Show();
+				this->Hide();
+		}
+		else {
+			MessageBox::Show("The login or password is incorrect");
+		};
 	}
 	
 	private: System::Void Sign_Up_Button_Click(System::Object^ sender, System::EventArgs^ e) {
