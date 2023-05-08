@@ -122,17 +122,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Auth\User.cpp" />
     <ClCompile Include="Forms\Auth.cpp" />
     <ClCompile Include="Forms\Main.cpp" />
+    <ClCompile Include="Forms\Start.cpp" />
     <ClCompile Include="Forms\Test.cpp" />
     <ClCompile Include="Forms\Text_For_Test.cpp" />
-    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Models\Models.cpp" />
+    <ClCompile Include="Program.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Auth\User.h" />
     <ClInclude Include="Forms\Auth.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="Forms\Main.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="Forms\Start.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="Forms\Test.h">
@@ -148,6 +155,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Main.resx">
       <DependentUpon>Forms\Main.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Start.resx">
+      <DependentUpon>Forms\Start.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Test.resx">
       <DependentUpon>Forms\Test.h</DependentUpon>
