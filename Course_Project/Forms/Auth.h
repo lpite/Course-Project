@@ -1,6 +1,13 @@
 #pragma once
+#include <sqlite_orm/sqlite_orm.h>
+#include <string>
+#include <iostream>
+#include <stdlib.h>
+#include <msclr\marshal_cppstd.h>
 
 #include "Main.h"
+#include "../Auth/User.h"
+
 
 namespace CourseProject {
 
@@ -10,6 +17,10 @@ namespace CourseProject {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace sqlite_orm;
+	using namespace std;
+	using namespace msclr::interop;
+	using namespace User;
 
 	/// <summary>
 	/// Summary for Auth
@@ -71,7 +82,7 @@ namespace CourseProject {
 			this->Sign_In_Button->FlatAppearance->BorderColor = System::Drawing::Color::White;
 			this->Sign_In_Button->FlatAppearance->BorderSize = 0;
 			this->Sign_In_Button->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->Sign_In_Button->Location = System::Drawing::Point(244, 242);
+			this->Sign_In_Button->Location = System::Drawing::Point(255, 298);
 			this->Sign_In_Button->Name = L"Sign_In_Button";
 			this->Sign_In_Button->Size = System::Drawing::Size(250, 40);
 			this->Sign_In_Button->TabIndex = 0;
@@ -84,7 +95,7 @@ namespace CourseProject {
 			this->Password_Input->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->Password_Input->Location = System::Drawing::Point(284, 195);
+			this->Password_Input->Location = System::Drawing::Point(295, 251);
 			this->Password_Input->Name = L"Password_Input";
 			this->Password_Input->Size = System::Drawing::Size(168, 29);
 			this->Password_Input->TabIndex = 1;
@@ -95,7 +106,7 @@ namespace CourseProject {
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
 			this->Login_Input->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
-			this->Login_Input->Location = System::Drawing::Point(284, 148);
+			this->Login_Input->Location = System::Drawing::Point(295, 204);
 			this->Login_Input->Name = L"Login_Input";
 			this->Login_Input->Size = System::Drawing::Size(168, 29);
 			this->Login_Input->TabIndex = 2;
@@ -108,7 +119,7 @@ namespace CourseProject {
 			this->Text_Label->AutoSize = true;
 			this->Text_Label->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 16, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->Text_Label->Location = System::Drawing::Point(279, 97);
+			this->Text_Label->Location = System::Drawing::Point(280, 153);
 			this->Text_Label->Name = L"Text_Label";
 			this->Text_Label->Size = System::Drawing::Size(193, 26);
 			this->Text_Label->TabIndex = 3;
@@ -126,12 +137,13 @@ namespace CourseProject {
 			this->Sign_Up_Button->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14, System::Drawing::FontStyle::Underline, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->Sign_Up_Button->ForeColor = System::Drawing::SystemColors::Highlight;
-			this->Sign_Up_Button->Location = System::Drawing::Point(319, 288);
+			this->Sign_Up_Button->Location = System::Drawing::Point(330, 344);
 			this->Sign_Up_Button->Name = L"Sign_Up_Button";
 			this->Sign_Up_Button->Size = System::Drawing::Size(100, 45);
 			this->Sign_Up_Button->TabIndex = 4;
 			this->Sign_Up_Button->Text = L"Sign Up";
 			this->Sign_Up_Button->UseVisualStyleBackColor = false;
+			this->Sign_Up_Button->Click += gcnew System::EventHandler(this, &Auth::Sign_Up_Button_Click);
 			// 
 			// Auth
 			// 
@@ -149,16 +161,36 @@ namespace CourseProject {
 			this->Name = L"Auth";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Auth";
+			this->Load += gcnew System::EventHandler(this, &Auth::Auth_Load);
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
 		}
 #pragma endregion
-
+	
+	private: System::Void Auth_Load(System::Object^ sender, System::EventArgs^ e) {
+	
+	}
+	
 	private: System::Void Sign_In_Button_Click(System::Object^ sender, System::EventArgs^ e) {
-		Main^ MainForm = gcnew Main();
+	/*	Main^ MainForm = gcnew Main();
 		MainForm->Show();
-		this->Hide();
+		this->Hide();*/
+		string Login = marshal_as<string>(Login_Input->Text);
+		string Password = marshal_as<string>(Password_Input->Text);
+		User::SignIn(Login, Password);
+		
+	}
+	
+	private: System::Void Sign_Up_Button_Click(System::Object^ sender, System::EventArgs^ e) {
+
+		string Login = marshal_as<string>(Login_Input->Text);
+		string Password = marshal_as<string>(Password_Input->Text);
+
+		if (User::SignUp(Login, Password))
+		{
+			MessageBox::Show("Shit");
+		}
 	}
 };
 }
