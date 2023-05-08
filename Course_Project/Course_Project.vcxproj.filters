@@ -33,9 +33,6 @@
     <ClCompile Include="Forms\Start.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Models\Models.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Auth\User.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

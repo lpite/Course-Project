@@ -128,7 +128,6 @@
     <ClCompile Include="Forms\Start.cpp" />
     <ClCompile Include="Forms\Test.cpp" />
     <ClCompile Include="Forms\Text_For_Test.cpp" />
-    <ClCompile Include="Models\Models.cpp" />
     <ClCompile Include="Program.cpp" />
   </ItemGroup>
   <ItemGroup>
