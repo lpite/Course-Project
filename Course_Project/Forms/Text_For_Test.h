@@ -1,4 +1,10 @@
 #pragma once
+#include <string>
+#include <iostream>
+#include <stdlib.h>
+#include <msclr\marshal_cppstd.h>
+
+#include "../Auth/User.h"
 
 namespace CourseProject {
 
@@ -74,20 +80,25 @@ namespace CourseProject {
 			// 
 			// Information_TextBox
 			// 
+			this->Information_TextBox->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
+			this->Information_TextBox->ForeColor = System::Drawing::Color::Black;
 			this->Information_TextBox->Location = System::Drawing::Point(12, 64);
 			this->Information_TextBox->Name = L"Information_TextBox";
+			this->Information_TextBox->ReadOnly = true;
 			this->Information_TextBox->Size = System::Drawing::Size(560, 224);
 			this->Information_TextBox->TabIndex = 1;
-			this->Information_TextBox->Text = L"";
+			this->Information_TextBox->Text = L"1234567890";
 			// 
 			// Save_Information_Button
 			// 
-			this->Save_Information_Button->Location = System::Drawing::Point(218, 312);
+			this->Save_Information_Button->Location = System::Drawing::Point(249, 312);
 			this->Save_Information_Button->Name = L"Save_Information_Button";
 			this->Save_Information_Button->Size = System::Drawing::Size(96, 37);
 			this->Save_Information_Button->TabIndex = 2;
 			this->Save_Information_Button->Text = L"Save";
 			this->Save_Information_Button->UseVisualStyleBackColor = true;
+			this->Save_Information_Button->Visible = false;
 			this->Save_Information_Button->Click += gcnew System::EventHandler(this, &Text_For_Test::Save_Information_Button_Click);
 			// 
 			// Text_For_Test
@@ -101,13 +112,23 @@ namespace CourseProject {
 			this->Name = L"Text_For_Test";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Text_For_Test";
+			this->Load += gcnew System::EventHandler(this, &Text_For_Test::Text_For_Test_Load);
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
 		}
 #pragma endregion
+	private: System::Void Text_For_Test_Load(System::Object^ sender, System::EventArgs^ e) {
+		auto user = User::GetCurrent()[0];
+		if (user.is_admin)
+		{
+			Save_Information_Button->Visible = TRUE;
+			Information_TextBox->ReadOnly = FALSE;
+		}
+	}
 	private: System::Void Save_Information_Button_Click(System::Object^ sender, System::EventArgs^ e) {
 		this->Hide();
 	}
-	};
+	
+};
 }
