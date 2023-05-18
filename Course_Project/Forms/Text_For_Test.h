@@ -5,6 +5,7 @@
 #include <msclr\marshal_cppstd.h>
 
 #include "../Auth/User.h"
+#include "../Question/Question.h"
 
 namespace CourseProject {
 
@@ -14,6 +15,7 @@ namespace CourseProject {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace msclr::interop;
 
 	/// <summary>
 	/// Summary for Text_For_Test
@@ -88,7 +90,7 @@ namespace CourseProject {
 			this->Information_TextBox->ReadOnly = true;
 			this->Information_TextBox->Size = System::Drawing::Size(560, 224);
 			this->Information_TextBox->TabIndex = 1;
-			this->Information_TextBox->Text = L"1234567890";
+			this->Information_TextBox->Text = L"";
 			// 
 			// Save_Information_Button
 			// 
@@ -125,9 +127,20 @@ namespace CourseProject {
 			Save_Information_Button->Visible = TRUE;
 			Information_TextBox->ReadOnly = FALSE;
 		}
+		std::string QuestionText = Question::GetTestText();
+		Information_TextBox->Text = marshal_as<String^>(QuestionText);
 	}
 	private: System::Void Save_Information_Button_Click(System::Object^ sender, System::EventArgs^ e) {
-		this->Hide();
+		std::string Text = marshal_as<std::string>(Information_TextBox->Text);
+		int result = Question::EditTestText(Text);
+		if (result)
+		{
+			MessageBox::Show("Error");
+		}
+		else {
+			MessageBox::Show("Success");
+			this->Hide();
+		}
 	}
 	
 };

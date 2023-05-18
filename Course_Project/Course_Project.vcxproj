@@ -129,6 +129,7 @@
     <ClCompile Include="Forms\Test.cpp" />
     <ClCompile Include="Forms\Text_For_Test.cpp" />
     <ClCompile Include="Program.cpp" />
+    <ClCompile Include="Question\Question.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Auth\User.h" />
@@ -147,6 +148,7 @@
     <ClInclude Include="Forms\Text_For_Test.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="Question\Question.h" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Forms\Auth.resx">

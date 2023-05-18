@@ -144,6 +144,7 @@ namespace CourseProject {
 		if (user.is_admin)
 		{
 			History_Button->Visible = TRUE;
+			To_Test_Button->Text = "Edit tests";
 		}
 	}
 

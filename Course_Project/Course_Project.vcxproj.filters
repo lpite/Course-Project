@@ -36,6 +36,9 @@
     <ClCompile Include="Auth\User.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Question\Question.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Forms\Auth.h">
@@ -54,6 +57,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Auth\User.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Question\Question.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
