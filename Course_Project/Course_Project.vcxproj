@@ -124,16 +124,20 @@
   <ItemGroup>
     <ClCompile Include="Auth\User.cpp" />
     <ClCompile Include="Forms\Auth.cpp" />
+    <ClCompile Include="Forms\EditTest.cpp" />
     <ClCompile Include="Forms\Main.cpp" />
     <ClCompile Include="Forms\Start.cpp" />
-    <ClCompile Include="Forms\Test.cpp" />
+    <ClCompile Include="Forms\Test_Form.cpp" />
     <ClCompile Include="Forms\Text_For_Test.cpp" />
     <ClCompile Include="Program.cpp" />
-    <ClCompile Include="Question\Question.cpp" />
+    <ClCompile Include="Test\Test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Auth\User.h" />
     <ClInclude Include="Forms\Auth.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="Forms\EditTest.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="Forms\Main.h">
@@ -142,17 +146,20 @@
     <ClInclude Include="Forms\Start.h">
       <FileType>CppForm</FileType>
     </ClInclude>
-    <ClInclude Include="Forms\Test.h">
+    <ClInclude Include="Forms\Test_Form.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="Forms\Text_For_Test.h">
       <FileType>CppForm</FileType>
     </ClInclude>
-    <ClInclude Include="Question\Question.h" />
+    <ClInclude Include="Test\Test.h" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Forms\Auth.resx">
       <DependentUpon>Forms\Auth.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\EditTest.resx">
+      <DependentUpon>Forms\EditTest.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Main.resx">
       <DependentUpon>Forms\Main.h</DependentUpon>
@@ -160,8 +167,8 @@
     <EmbeddedResource Include="Forms\Start.resx">
       <DependentUpon>Forms\Start.h</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Test.resx">
-      <DependentUpon>Forms\Test.h</DependentUpon>
+    <EmbeddedResource Include="Forms\Test_Form.resx">
+      <DependentUpon>Forms\Test_Form.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Text_For_Test.resx">
       <DependentUpon>Forms\Text_For_Test.h</DependentUpon>

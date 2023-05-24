@@ -27,7 +27,7 @@
     <ClCompile Include="Forms\Text_For_Test.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Forms\Test.cpp">
+    <ClCompile Include="Forms\Test_Form.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Forms\Start.cpp">
@@ -36,7 +36,10 @@
     <ClCompile Include="Auth\User.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Question\Question.cpp">
+    <ClCompile Include="Test\Test.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Forms\EditTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -50,7 +53,7 @@
     <ClInclude Include="Forms\Text_For_Test.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Forms\Test.h">
+    <ClInclude Include="Forms\Test_Form.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Forms\Start.h">
@@ -59,7 +62,10 @@
     <ClInclude Include="Auth\User.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Question\Question.h">
+    <ClInclude Include="Test\Test.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Forms\EditTest.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

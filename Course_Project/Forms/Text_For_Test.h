@@ -5,7 +5,7 @@
 #include <msclr\marshal_cppstd.h>
 
 #include "../Auth/User.h"
-#include "../Question/Question.h"
+#include "../Test/Test.h"
 
 namespace CourseProject {
 
@@ -124,15 +124,16 @@ namespace CourseProject {
 		auto user = User::GetCurrent()[0];
 		if (user.is_admin)
 		{
-			Save_Information_Button->Visible = TRUE;
-			Information_TextBox->ReadOnly = FALSE;
+			Save_Information_Button->Visible = true;
+			Information_TextBox->ReadOnly = false;
 		}
-		std::string QuestionText = Question::GetTestText();
+		
+		std::string QuestionText = Test::GetTest().Text;
 		Information_TextBox->Text = marshal_as<String^>(QuestionText);
 	}
 	private: System::Void Save_Information_Button_Click(System::Object^ sender, System::EventArgs^ e) {
 		std::string Text = marshal_as<std::string>(Information_TextBox->Text);
-		int result = Question::EditTestText(Text);
+		int result = Test::EditTestText(Text);
 		if (result)
 		{
 			MessageBox::Show("Error");

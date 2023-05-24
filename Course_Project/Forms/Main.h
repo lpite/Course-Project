@@ -7,7 +7,8 @@
 #include "../Auth/User.h"
 
 #include "Text_For_Test.h"
-#include "Test.h"
+#include "Test_Form.h"
+#include "EditTest.h"
 
 
 namespace CourseProject {
@@ -48,6 +49,8 @@ namespace CourseProject {
 	private: System::Windows::Forms::Label^ Greeting_Label;
 	private: System::Windows::Forms::Button^ Read_Text_Button;
 	private: System::Windows::Forms::Button^ History_Button;
+	private: System::Windows::Forms::Button^ Edit_Test;
+
 
 
 
@@ -75,11 +78,12 @@ namespace CourseProject {
 			this->Greeting_Label = (gcnew System::Windows::Forms::Label());
 			this->Read_Text_Button = (gcnew System::Windows::Forms::Button());
 			this->History_Button = (gcnew System::Windows::Forms::Button());
+			this->Edit_Test = (gcnew System::Windows::Forms::Button());
 			this->SuspendLayout();
 			// 
 			// To_Test_Button
 			// 
-			this->To_Test_Button->Location = System::Drawing::Point(12, 143);
+			this->To_Test_Button->Location = System::Drawing::Point(12, 129);
 			this->To_Test_Button->Name = L"To_Test_Button";
 			this->To_Test_Button->Size = System::Drawing::Size(90, 34);
 			this->To_Test_Button->TabIndex = 0;
@@ -110,7 +114,7 @@ namespace CourseProject {
 			// 
 			// History_Button
 			// 
-			this->History_Button->Location = System::Drawing::Point(12, 198);
+			this->History_Button->Location = System::Drawing::Point(12, 169);
 			this->History_Button->Name = L"History_Button";
 			this->History_Button->Size = System::Drawing::Size(90, 34);
 			this->History_Button->TabIndex = 3;
@@ -118,11 +122,23 @@ namespace CourseProject {
 			this->History_Button->UseVisualStyleBackColor = true;
 			this->History_Button->Visible = false;
 			// 
+			// Edit_Test
+			// 
+			this->Edit_Test->Location = System::Drawing::Point(12, 209);
+			this->Edit_Test->Name = L"Edit_Test";
+			this->Edit_Test->Size = System::Drawing::Size(90, 34);
+			this->Edit_Test->TabIndex = 4;
+			this->Edit_Test->Text = L"Edit Test";
+			this->Edit_Test->UseVisualStyleBackColor = true;
+			this->Edit_Test->Visible = false;
+			this->Edit_Test->Click += gcnew System::EventHandler(this, &Main::Edit_Test_Click);
+			// 
 			// Main
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(784, 561);
+			this->Controls->Add(this->Edit_Test);
 			this->Controls->Add(this->History_Button);
 			this->Controls->Add(this->Read_Text_Button);
 			this->Controls->Add(this->Greeting_Label);
@@ -145,6 +161,7 @@ namespace CourseProject {
 		{
 			History_Button->Visible = TRUE;
 			To_Test_Button->Text = "Edit tests";
+			Edit_Test->Visible = TRUE;
 		}
 	}
 
@@ -159,9 +176,13 @@ namespace CourseProject {
 	}
 
 	private: System::Void To_Test_Button_Click(System::Object^ sender, System::EventArgs^ e) {
-		Test^ Test_Form = gcnew Test();
-		Test_Form->ShowDialog();
+		Test_Form^ Test_Form1 = gcnew Test_Form();
+		Test_Form1->ShowDialog();
 	}
 	
+private: System::Void Edit_Test_Click(System::Object^ sender, System::EventArgs^ e) {
+	EditTest^ Edit_Test_Form = gcnew EditTest();
+	Edit_Test_Form->ShowDialog();
+}
 };
 }
