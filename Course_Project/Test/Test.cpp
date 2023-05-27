@@ -11,7 +11,17 @@ auto storage = make_storage(
 		make_column("text", &Test::TEST::Text),
 		make_column("time", &Test::TEST::Time),
 		make_column("questions_count", &Test::TEST::QuestionsCount)
-	)
+	),
+	make_table("question",
+		make_column("id", &Test::QUESTION::id, primary_key()),
+		make_column("question_number", &Test::QUESTION::QuestionNumber),
+		make_column("text", &Test::QUESTION::Text)),
+	make_table("anwer",
+		make_column("id", &Test::ANSWER::Id, primary_key().autoincrement()),
+		make_column("question_id", &Test::ANSWER::QuestionId),
+		make_column("text", &Test::ANSWER::Text),
+		make_column("is_true", &Test::ANSWER::IsTrue),
+		foreign_key(&Test::ANSWER::QuestionId).references(&Test::QUESTION::id))
 );
 
 
@@ -44,27 +54,6 @@ int Test::EditTestText(std::string Text) {
 		return 1;
 	}
 	
-}
-
-std::string Test::GetTestText() {
-	try
-	{
-		storage.sync_schema();
-
-		auto questions = storage.get_all<Test::TEST>();
-		if (questions.size())
-		{
-			return questions[0].Text;
-		}
-		std::cout << "Error";
-		return "";
-	}
-	catch (const std::system_error& e)
-	{
-		std::cout << e.what();
-	}
-
-	return "";
 }
 
 int Test::SetTestTimeAndQuestionsCount(int Time,int Count) {
@@ -116,3 +105,57 @@ Test::TEST Test::GetTest() {
 	}
 }
 
+
+Test::QUESTION Test::GetQuestion(int QuestionNumber) {
+	Test::QUESTION QuestionObject = {
+		0,
+		1,
+		""
+	};
+	try
+	{
+		storage.sync_schema();
+		auto Questions = storage.get_all<Test::QUESTION>(where(c(&Test::QUESTION::QuestionNumber) == QuestionNumber));
+		if (Questions.size())
+		{
+			auto Question = Questions[0];
+			return Question;
+		}
+		return QuestionObject;
+	}
+	catch (const std::system_error& e)
+	{
+		std::cout << e.what();
+		return QuestionObject;
+	}
+}
+
+int Test::EditQuestion(int QuestionNumber, std::string NewText) {
+	try
+	{
+		storage.sync_schema();
+
+		Test::QUESTION QuestionObject = {
+			0,
+			QuestionNumber,
+			NewText
+		};
+		std::cout << QuestionNumber <<std::endl;
+		auto Questions = storage.get_all<Test::QUESTION>(where(c(&Test::QUESTION::QuestionNumber) == QuestionNumber));
+		if (Questions.size()) {
+			storage.update<Test::QUESTION>(QuestionObject);
+		}
+		else {
+			storage.insert<Test::QUESTION>(QuestionObject);
+
+		}
+
+		
+		return 0;
+	}
+	catch (const std::system_error& e)
+	{
+		std::cout << e.what();
+		return 1;
+	}
+}

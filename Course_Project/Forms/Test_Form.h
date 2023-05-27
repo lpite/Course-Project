@@ -1,8 +1,17 @@
 ﻿#pragma once
 
+#include <stdlib.h>
+#include <array>
+#include <tuple>
+#include <msclr\marshal_cppstd.h>
+
 #include "../Auth/User.h"
 #include "../Test/Test.h"
 
+struct doublyNode
+{
+
+};
 
 namespace CourseProject {
 
@@ -12,6 +21,7 @@ namespace CourseProject {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace msclr::interop;
 
 	/// <summary>
 	/// Summary for Test_Form
@@ -25,6 +35,7 @@ namespace CourseProject {
 			//
 			//TODO: Add the constructor code here
 			//
+
 		}
 
 	protected:
@@ -51,6 +62,8 @@ namespace CourseProject {
 	private: System::Windows::Forms::Button^ Next_Question_Button;
 	private: System::Windows::Forms::Button^ Prev_Question_Button;
 	private: System::Windows::Forms::Label^ Question_Number_Label;
+	private: System::Windows::Forms::Button^ Save_Test_Button;
+
 
 	protected:
 
@@ -78,6 +91,7 @@ namespace CourseProject {
 			this->Next_Question_Button = (gcnew System::Windows::Forms::Button());
 			this->Prev_Question_Button = (gcnew System::Windows::Forms::Button());
 			this->Question_Number_Label = (gcnew System::Windows::Forms::Label());
+			this->Save_Test_Button = (gcnew System::Windows::Forms::Button());
 			this->SuspendLayout();
 			// 
 			// label1
@@ -218,11 +232,24 @@ namespace CourseProject {
 			this->Question_Number_Label->TabIndex = 9;
 			this->Question_Number_Label->Text = L"Question";
 			// 
+			// Save_Test_Button
+			// 
+			this->Save_Test_Button->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->Save_Test_Button->Location = System::Drawing::Point(553, 494);
+			this->Save_Test_Button->Name = L"Save_Test_Button";
+			this->Save_Test_Button->Size = System::Drawing::Size(107, 54);
+			this->Save_Test_Button->TabIndex = 10;
+			this->Save_Test_Button->Text = L"Save";
+			this->Save_Test_Button->UseVisualStyleBackColor = true;
+			this->Save_Test_Button->Click += gcnew System::EventHandler(this, &Test_Form::Save_Test_Button_Click);
+			// 
 			// Test_Form
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(1264, 681);
+			this->Controls->Add(this->Save_Test_Button);
 			this->Controls->Add(this->Question_Number_Label);
 			this->Controls->Add(this->Prev_Question_Button);
 			this->Controls->Add(this->Next_Question_Button);
@@ -244,14 +271,18 @@ namespace CourseProject {
 
 		}
 #pragma endregion
-	private: int QuestionId = 0;
+	private: int QuestionNumber = 1;
+	
 	private: System::Void Test_Form_Load(System::Object^ sender, System::EventArgs^ e) {
+
 		auto user = User::GetCurrent()[0];
 		if (user.is_admin)
 		{
 			Question_Text->ReadOnly = false;
 		}
-		
+		auto Question = Test::GetQuestion(QuestionNumber);
+		Question_Text->Text = marshal_as<String^>(Question.Text);
+
 		Question_Number_Label->Text = "Question 1";
 		
 	}
@@ -264,20 +295,30 @@ namespace CourseProject {
 	}
 
 	private: System::Void Prev_Question_Button_Click(System::Object^ sender, System::EventArgs^ e) {
-		if (QuestionId != 0)
+		if (QuestionNumber != 1)
 		{
-			QuestionId--;
-			Question_Number_Label->Text = "Question "+ Convert::ToString(QuestionId+1);
+			QuestionNumber--;
+			Question_Number_Label->Text = "Question "+ Convert::ToString(QuestionNumber);
+			auto Question = Test::GetQuestion(QuestionNumber);
+			Question_Text->Text = marshal_as<String^>(Question.Text);
 		}
 	}
 	
 	private: System::Void Next_Question_Button_Click(System::Object^ sender, System::EventArgs^ e) {
 		auto test = Test::GetTest();
-		if (QuestionId+1 != test.QuestionsCount)
+		if (QuestionNumber != test.QuestionsCount)
 		{
-			QuestionId++;
-			Question_Number_Label->Text = "Question " + Convert::ToString(QuestionId+1);
+			QuestionNumber++;
+			Question_Number_Label->Text = "Question " + Convert::ToString(QuestionNumber);
+			auto Question = Test::GetQuestion(QuestionNumber);
+			Question_Text->Text = marshal_as<String^>(Question.Text);
+
 		}
+	}
+	private: System::Void Save_Test_Button_Click(System::Object^ sender, System::EventArgs^ e) {
+		std::string NewText = marshal_as<std::string>(Question_Text->Text);
+
+		Test::EditQuestion(QuestionNumber, NewText);
 	}
 };
 }

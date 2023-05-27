@@ -51,10 +51,6 @@ namespace CourseProject {
 	private: System::Windows::Forms::Button^ History_Button;
 	private: System::Windows::Forms::Button^ Edit_Test;
 
-
-
-
-
 	protected:
 
 	protected:
