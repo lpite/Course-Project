@@ -4,14 +4,19 @@
 #include <array>
 #include <tuple>
 #include <msclr\marshal_cppstd.h>
+#include <malloc.h>
+#include <iostream>
+
 
 #include "../Auth/User.h"
 #include "../Test/Test.h"
 
-struct doublyNode
-{
-
-};
+typedef struct DoublyNode {
+	int QuestionNumber;
+	int SelectedAnswer;
+	struct DoublyNode* next;
+	struct DoublyNode* prev;
+} DoublyNode;
 
 namespace CourseProject {
 
@@ -63,6 +68,13 @@ namespace CourseProject {
 	private: System::Windows::Forms::Button^ Prev_Question_Button;
 	private: System::Windows::Forms::Label^ Question_Number_Label;
 	private: System::Windows::Forms::Button^ Save_Test_Button;
+	private: System::Windows::Forms::TextBox^ TextBox_Answer1;
+	private: System::Windows::Forms::TextBox^ TextBox_Answer4;
+
+	private: System::Windows::Forms::TextBox^ TextBox_Answer3;
+
+	private: System::Windows::Forms::TextBox^ TextBox_Answer2;
+	private: System::Windows::Forms::TextBox^ TextBox_Answer5;
 
 
 	protected:
@@ -92,6 +104,11 @@ namespace CourseProject {
 			this->Prev_Question_Button = (gcnew System::Windows::Forms::Button());
 			this->Question_Number_Label = (gcnew System::Windows::Forms::Label());
 			this->Save_Test_Button = (gcnew System::Windows::Forms::Button());
+			this->TextBox_Answer1 = (gcnew System::Windows::Forms::TextBox());
+			this->TextBox_Answer4 = (gcnew System::Windows::Forms::TextBox());
+			this->TextBox_Answer3 = (gcnew System::Windows::Forms::TextBox());
+			this->TextBox_Answer2 = (gcnew System::Windows::Forms::TextBox());
+			this->TextBox_Answer5 = (gcnew System::Windows::Forms::TextBox());
 			this->SuspendLayout();
 			// 
 			// label1
@@ -122,7 +139,7 @@ namespace CourseProject {
 			this->Answer_Radio_1->AutoSize = true;
 			this->Answer_Radio_1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->Answer_Radio_1->Location = System::Drawing::Point(553, 244);
+			this->Answer_Radio_1->Location = System::Drawing::Point(553, 246);
 			this->Answer_Radio_1->Margin = System::Windows::Forms::Padding(10);
 			this->Answer_Radio_1->Name = L"Answer_Radio_1";
 			this->Answer_Radio_1->Size = System::Drawing::Size(107, 28);
@@ -136,7 +153,7 @@ namespace CourseProject {
 			this->Answer_Radio_2->AutoSize = true;
 			this->Answer_Radio_2->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->Answer_Radio_2->Location = System::Drawing::Point(553, 292);
+			this->Answer_Radio_2->Location = System::Drawing::Point(553, 294);
 			this->Answer_Radio_2->Margin = System::Windows::Forms::Padding(10);
 			this->Answer_Radio_2->Name = L"Answer_Radio_2";
 			this->Answer_Radio_2->Size = System::Drawing::Size(107, 28);
@@ -150,7 +167,7 @@ namespace CourseProject {
 			this->Answer_Radio_3->AutoSize = true;
 			this->Answer_Radio_3->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->Answer_Radio_3->Location = System::Drawing::Point(553, 340);
+			this->Answer_Radio_3->Location = System::Drawing::Point(553, 342);
 			this->Answer_Radio_3->Margin = System::Windows::Forms::Padding(10);
 			this->Answer_Radio_3->Name = L"Answer_Radio_3";
 			this->Answer_Radio_3->Size = System::Drawing::Size(107, 28);
@@ -164,7 +181,7 @@ namespace CourseProject {
 			this->Answer_Radio_4->AutoSize = true;
 			this->Answer_Radio_4->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->Answer_Radio_4->Location = System::Drawing::Point(553, 388);
+			this->Answer_Radio_4->Location = System::Drawing::Point(553, 390);
 			this->Answer_Radio_4->Margin = System::Windows::Forms::Padding(10);
 			this->Answer_Radio_4->Name = L"Answer_Radio_4";
 			this->Answer_Radio_4->Size = System::Drawing::Size(107, 28);
@@ -178,7 +195,7 @@ namespace CourseProject {
 			this->Answer_Radio_5->AutoSize = true;
 			this->Answer_Radio_5->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->Answer_Radio_5->Location = System::Drawing::Point(553, 436);
+			this->Answer_Radio_5->Location = System::Drawing::Point(553, 438);
 			this->Answer_Radio_5->Margin = System::Windows::Forms::Padding(10);
 			this->Answer_Radio_5->Name = L"Answer_Radio_5";
 			this->Answer_Radio_5->Size = System::Drawing::Size(107, 28);
@@ -189,6 +206,8 @@ namespace CourseProject {
 			// 
 			// Question_Text
 			// 
+			this->Question_Text->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
 			this->Question_Text->Location = System::Drawing::Point(374, 91);
 			this->Question_Text->Name = L"Question_Text";
 			this->Question_Text->ReadOnly = true;
@@ -242,13 +261,64 @@ namespace CourseProject {
 			this->Save_Test_Button->TabIndex = 10;
 			this->Save_Test_Button->Text = L"Save";
 			this->Save_Test_Button->UseVisualStyleBackColor = true;
+			this->Save_Test_Button->Visible = false;
 			this->Save_Test_Button->Click += gcnew System::EventHandler(this, &Test_Form::Save_Test_Button_Click);
+			// 
+			// TextBox_Answer1
+			// 
+			this->TextBox_Answer1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->TextBox_Answer1->Location = System::Drawing::Point(408, 248);
+			this->TextBox_Answer1->Name = L"TextBox_Answer1";
+			this->TextBox_Answer1->Size = System::Drawing::Size(112, 26);
+			this->TextBox_Answer1->TabIndex = 11;
+			// 
+			// TextBox_Answer4
+			// 
+			this->TextBox_Answer4->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->TextBox_Answer4->Location = System::Drawing::Point(408, 390);
+			this->TextBox_Answer4->Name = L"TextBox_Answer4";
+			this->TextBox_Answer4->Size = System::Drawing::Size(112, 26);
+			this->TextBox_Answer4->TabIndex = 12;
+			// 
+			// TextBox_Answer3
+			// 
+			this->TextBox_Answer3->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->TextBox_Answer3->Location = System::Drawing::Point(408, 344);
+			this->TextBox_Answer3->Name = L"TextBox_Answer3";
+			this->TextBox_Answer3->Size = System::Drawing::Size(112, 26);
+			this->TextBox_Answer3->TabIndex = 13;
+			// 
+			// TextBox_Answer2
+			// 
+			this->TextBox_Answer2->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->TextBox_Answer2->Location = System::Drawing::Point(408, 296);
+			this->TextBox_Answer2->Name = L"TextBox_Answer2";
+			this->TextBox_Answer2->Size = System::Drawing::Size(112, 26);
+			this->TextBox_Answer2->TabIndex = 14;
+			// 
+			// TextBox_Answer5
+			// 
+			this->TextBox_Answer5->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->TextBox_Answer5->Location = System::Drawing::Point(408, 438);
+			this->TextBox_Answer5->Name = L"TextBox_Answer5";
+			this->TextBox_Answer5->Size = System::Drawing::Size(112, 26);
+			this->TextBox_Answer5->TabIndex = 15;
 			// 
 			// Test_Form
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(1264, 681);
+			this->Controls->Add(this->TextBox_Answer5);
+			this->Controls->Add(this->TextBox_Answer2);
+			this->Controls->Add(this->TextBox_Answer3);
+			this->Controls->Add(this->TextBox_Answer4);
+			this->Controls->Add(this->TextBox_Answer1);
 			this->Controls->Add(this->Save_Test_Button);
 			this->Controls->Add(this->Question_Number_Label);
 			this->Controls->Add(this->Prev_Question_Button);
@@ -272,19 +342,115 @@ namespace CourseProject {
 		}
 #pragma endregion
 	private: int QuestionNumber = 1;
-	
+	DoublyNode* head = NULL;
+
+	private:void ChangeAnswers(){
+		auto User = User::GetCurrent()[0];
+
+		auto Question = Test::GetQuestion(QuestionNumber);
+
+		auto Answers = Test::GetAnswers(Question.id);
+
+		if (Answers.size())
+		{
+			TextBox_Answer1->Text = marshal_as<String^>(Answers[0].Text);
+			TextBox_Answer2->Text = marshal_as<String^>(Answers[1].Text);
+			TextBox_Answer3->Text = marshal_as<String^>(Answers[2].Text);
+			TextBox_Answer4->Text = marshal_as<String^>(Answers[3].Text);
+			if (User.is_admin)
+			{
+				Answer_Radio_1->Checked = Answers[0].IsTrue;
+				Answer_Radio_2->Checked = Answers[1].IsTrue;
+				Answer_Radio_3->Checked = Answers[2].IsTrue;
+				Answer_Radio_4->Checked = Answers[3].IsTrue;
+				Answer_Radio_5->Checked = Answers[4].IsTrue;
+			}
+			else {
+				Answer_Radio_1->Checked = false;
+				Answer_Radio_2->Checked = false;
+				Answer_Radio_3->Checked = false;
+				Answer_Radio_4->Checked = false;
+				Answer_Radio_5->Checked = false;
+				Answer_Radio_1->Text = marshal_as<String^>(Answers[0].Text);
+				Answer_Radio_2->Text = marshal_as<String^>(Answers[1].Text);
+				Answer_Radio_3->Text = marshal_as<String^>(Answers[2].Text);
+				Answer_Radio_4->Text = marshal_as<String^>(Answers[3].Text);
+				Answer_Radio_5->Text = marshal_as<String^>(Answers[4].Text);
+			}																
+		}
+		else {
+			TextBox_Answer1->Text = "";
+			TextBox_Answer2->Text = "";
+			TextBox_Answer3->Text = "";
+			TextBox_Answer4->Text = "";
+			Answer_Radio_1->Checked = false;
+			Answer_Radio_2->Checked = false;
+			Answer_Radio_3->Checked = false;
+			Answer_Radio_4->Checked = false;
+			Answer_Radio_5->Checked = false;
+		}
+
+	}
+
 	private: System::Void Test_Form_Load(System::Object^ sender, System::EventArgs^ e) {
 
-		auto user = User::GetCurrent()[0];
-		if (user.is_admin)
+	
+
+		auto TestObject = Test::GetTest();
+		auto User = User::GetCurrent()[0];
+		auto Question = Test::GetQuestion(QuestionNumber);
+		auto Answers = Test::GetAnswers(Question.id);
+
+		for (int i = 0; i < TestObject.QuestionsCount; ++i) {
+			DoublyNode* tmp = (DoublyNode*)malloc(sizeof(DoublyNode));
+			if (tmp)
+			{
+				tmp->QuestionNumber = i + 1;
+				tmp->SelectedAnswer = 0;
+				tmp->prev = NULL;
+				tmp->next = head;
+				head = tmp;
+				std::cout << tmp->QuestionNumber << std::endl;
+			}
+		}
+
+		ChangeAnswers();
+		if (User.is_admin)
 		{
 			Question_Text->ReadOnly = false;
+			Answer_Radio_1->Text = "+";
+
+			Answer_Radio_2->Text = "+";
+
+			Answer_Radio_3->Text = "+";
+			Answer_Radio_4->Text = "+";
+
+			Answer_Radio_5->Text = "+";
+
+			TextBox_Answer5->Text = "Another";
+			TextBox_Answer5->ReadOnly = true;
+			Save_Test_Button->Visible = true;
 		}
-		auto Question = Test::GetQuestion(QuestionNumber);
+		else {
+			TextBox_Answer1->Visible = false;
+			TextBox_Answer2->Visible = false;
+			TextBox_Answer3->Visible = false;
+			TextBox_Answer4->Visible = false;
+			TextBox_Answer5->Visible = false;
+
+		}
+		if (Answers.size() && !User.is_admin)
+		{
+			Answer_Radio_1->Text = marshal_as<String^>(Answers[0].Text);
+			Answer_Radio_2->Text = marshal_as<String^>(Answers[1].Text);
+			Answer_Radio_3->Text = marshal_as<String^>(Answers[2].Text);
+			Answer_Radio_4->Text = marshal_as<String^>(Answers[3].Text);
+			Answer_Radio_5->Text = marshal_as<String^>(Answers[4].Text);
+		}
 		Question_Text->Text = marshal_as<String^>(Question.Text);
 
 		Question_Number_Label->Text = "Question 1";
-		
+
 	}
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
 		this->Close();
@@ -293,7 +459,7 @@ namespace CourseProject {
 	private: System::Void Question_Text_TextChanged(System::Object^ sender, System::EventArgs^ e) {
 
 	}
-
+	
 	private: System::Void Prev_Question_Button_Click(System::Object^ sender, System::EventArgs^ e) {
 		if (QuestionNumber != 1)
 		{
@@ -301,6 +467,16 @@ namespace CourseProject {
 			Question_Number_Label->Text = "Question "+ Convert::ToString(QuestionNumber);
 			auto Question = Test::GetQuestion(QuestionNumber);
 			Question_Text->Text = marshal_as<String^>(Question.Text);
+			ChangeAnswers();
+
+		/*	DoublyNode* tmp = (DoublyNode*)malloc(sizeof(DoublyNode));
+			tmp = head;
+			while (tmp != NULL)
+			{
+				std::cout << tmp->QuestionNumber << std::endl;
+				tmp = tmp->next;
+			}*/
+		
 		}
 	}
 	
@@ -312,13 +488,53 @@ namespace CourseProject {
 			Question_Number_Label->Text = "Question " + Convert::ToString(QuestionNumber);
 			auto Question = Test::GetQuestion(QuestionNumber);
 			Question_Text->Text = marshal_as<String^>(Question.Text);
+			ChangeAnswers();
 
 		}
 	}
 	private: System::Void Save_Test_Button_Click(System::Object^ sender, System::EventArgs^ e) {
 		std::string NewText = marshal_as<std::string>(Question_Text->Text);
+		std::array<Test::ANSWER,5> Answers;
+		
+		auto Question = Test::GetQuestion(QuestionNumber);
 
+		Answers[0] = {
+			-1,
+			Question.id,
+			marshal_as<std::string>(TextBox_Answer1->Text),
+			Answer_Radio_1->Checked
+		};
+		Answers[1] = {
+			-1,
+			Question.id,
+			marshal_as<std::string>(TextBox_Answer2->Text),
+			Answer_Radio_2->Checked
+		};
+		Answers[2] = {
+			-1,
+			Question.id,
+			marshal_as<std::string>(TextBox_Answer3->Text),
+			Answer_Radio_3->Checked
+		};
+		Answers[3] = {
+			-1,
+			Question.id,
+			marshal_as<std::string>(TextBox_Answer4->Text),
+			Answer_Radio_4->Checked
+		};
+		Answers[4] = {
+			-1,
+			Question.id,
+			marshal_as<std::string>(TextBox_Answer5->Text),
+			Answer_Radio_5->Checked
+		};
+
+
+		if (Test::SetAnwers(Question.id, Answers)) {
+			MessageBox::Show("Pishov");
+		}
 		Test::EditQuestion(QuestionNumber, NewText);
+		
 	}
 };
 }

@@ -16,7 +16,7 @@ auto storage = make_storage(
 		make_column("id", &Test::QUESTION::id, primary_key()),
 		make_column("question_number", &Test::QUESTION::QuestionNumber),
 		make_column("text", &Test::QUESTION::Text)),
-	make_table("anwer",
+	make_table("answer",
 		make_column("id", &Test::ANSWER::Id, primary_key().autoincrement()),
 		make_column("question_id", &Test::ANSWER::QuestionId),
 		make_column("text", &Test::ANSWER::Text),
@@ -32,7 +32,7 @@ int Test::EditTestText(std::string Text) {
 
 	auto question = storage.get_all<Test::TEST>();
 	Test::TEST newText{
-			1,
+			-1,
 			Text,
 			5,
 			15
@@ -40,6 +40,7 @@ int Test::EditTestText(std::string Text) {
 	
 		if (question.size())
 		{
+			newText.id = question[0].id;
 			storage.update(newText);
 		}
 		else {
@@ -61,12 +62,14 @@ int Test::SetTestTimeAndQuestionsCount(int Time,int Count) {
 		storage.sync_schema();
 		auto questions = storage.get_all<Test::TEST>();
 		Test::TEST Test;
-		Test.id = 1;
+		Test.id = -1;
 		Test.Time = Time;
 		Test.QuestionsCount = Count;
 		if (questions.size())
 		{
+			Test.id = questions[0].id;
 			Test.Text = questions[0].Text;
+
 			storage.update(Test);
 		}
 		else {
@@ -136,18 +139,18 @@ int Test::EditQuestion(int QuestionNumber, std::string NewText) {
 		storage.sync_schema();
 
 		Test::QUESTION QuestionObject = {
-			0,
+			-1,
 			QuestionNumber,
 			NewText
 		};
 		std::cout << QuestionNumber <<std::endl;
 		auto Questions = storage.get_all<Test::QUESTION>(where(c(&Test::QUESTION::QuestionNumber) == QuestionNumber));
 		if (Questions.size()) {
+			QuestionObject.id = Questions[0].id;
 			storage.update<Test::QUESTION>(QuestionObject);
 		}
 		else {
 			storage.insert<Test::QUESTION>(QuestionObject);
-
 		}
 
 		
@@ -157,5 +160,66 @@ int Test::EditQuestion(int QuestionNumber, std::string NewText) {
 	{
 		std::cout << e.what();
 		return 1;
+	}
+}
+
+int Test::ClearTest() {
+	try
+	{
+		storage.sync_schema();
+		storage.remove_all<Test::QUESTION>();
+		storage.remove_all<Test::TEST>();
+		return 0;
+	}
+	catch (const std::system_error& e)
+	{
+		std::cout << e.what();
+		return 1;
+	}
+}
+
+int Test::SetAnwers(int QuestionId,std::array<Test::ANSWER,5>& Answers) {
+	try
+	{
+		storage.sync_schema();
+		storage.remove_all<Test::ANSWER>(where(c(&Test::ANSWER::QuestionId) == QuestionId));
+		if (!Answers.size())
+		{
+			std::cout << Answers.size() << std::endl;
+			return 1;
+		}
+		for (int i = 0; i < 5; i++)
+		{
+			auto Answer = Answers[i];
+		
+			std::cout << Answer.Text << Answer.IsTrue << std::endl;
+			Test::ANSWER NsAnswer;
+			storage.insert(Answer);
+		}
+		return 0;
+	}
+	catch (const std::system_error& e)
+	{
+		std::cout << e.what();
+		return 1;
+	}
+}
+
+std::vector<Test::ANSWER,std::allocator<Test::ANSWER>> Test::GetAnswers(int QuestionId) {
+	try
+	{
+		storage.sync_schema();
+		auto a = storage.get_all<Test::ANSWER>(where(c(&Test::ANSWER::QuestionId) == QuestionId));
+		if (!a.size())
+		{
+			return std::vector<Test::ANSWER, std::allocator<Test::ANSWER>>{};
+		}
+		return a;
+	}
+	catch (const std::system_error& e)
+	{
+		std::cout << e.what();
+		return std::vector<Test::ANSWER, std::allocator<Test::ANSWER>>{};
+
 	}
 }

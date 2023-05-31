@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <vector>
 
 namespace Test {
 
@@ -28,7 +29,9 @@ namespace Test {
 	int SetTestTimeAndQuestionsCount(int Time, int Count);
 	TEST GetTest();
 	QUESTION GetQuestion(int id);
-	ANSWER GetAnswer(int id);
+	std::vector<Test::ANSWER, std::allocator<Test::ANSWER>> GetAnswers(int QuestionId);
 	int EditQuestion(int QuestionNumber,std::string NewText);
+	int ClearTest();
+	int SetAnwers(int QuestionId, std::array<Test::ANSWER, 5>& Answers);
 
 }

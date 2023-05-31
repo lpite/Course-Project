@@ -50,6 +50,8 @@ namespace CourseProject {
 	private: System::Windows::Forms::Button^ Read_Text_Button;
 	private: System::Windows::Forms::Button^ History_Button;
 	private: System::Windows::Forms::Button^ Edit_Test;
+	private: System::Windows::Forms::Button^ Clear_Test_Button;
+
 
 	protected:
 
@@ -75,6 +77,7 @@ namespace CourseProject {
 			this->Read_Text_Button = (gcnew System::Windows::Forms::Button());
 			this->History_Button = (gcnew System::Windows::Forms::Button());
 			this->Edit_Test = (gcnew System::Windows::Forms::Button());
+			this->Clear_Test_Button = (gcnew System::Windows::Forms::Button());
 			this->SuspendLayout();
 			// 
 			// To_Test_Button
@@ -129,11 +132,23 @@ namespace CourseProject {
 			this->Edit_Test->Visible = false;
 			this->Edit_Test->Click += gcnew System::EventHandler(this, &Main::Edit_Test_Click);
 			// 
+			// Clear_Test_Button
+			// 
+			this->Clear_Test_Button->Location = System::Drawing::Point(12, 249);
+			this->Clear_Test_Button->Name = L"Clear_Test_Button";
+			this->Clear_Test_Button->Size = System::Drawing::Size(90, 34);
+			this->Clear_Test_Button->TabIndex = 5;
+			this->Clear_Test_Button->Text = L"Clear Test";
+			this->Clear_Test_Button->UseVisualStyleBackColor = true;
+			this->Clear_Test_Button->Visible = false;
+			this->Clear_Test_Button->Click += gcnew System::EventHandler(this, &Main::Clear_Test_Button_Click);
+			// 
 			// Main
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(784, 561);
+			this->Controls->Add(this->Clear_Test_Button);
 			this->Controls->Add(this->Edit_Test);
 			this->Controls->Add(this->History_Button);
 			this->Controls->Add(this->Read_Text_Button);
@@ -155,9 +170,10 @@ namespace CourseProject {
 		Greeting_Label->Text = "Hello " + marshal_as<String^>(user.login);
 		if (user.is_admin)
 		{
-			History_Button->Visible = TRUE;
+			History_Button->Visible = true;
 			To_Test_Button->Text = "Edit tests";
-			Edit_Test->Visible = TRUE;
+			Edit_Test->Visible = true;
+			Clear_Test_Button->Visible = true;
 		}
 	}
 
@@ -176,9 +192,18 @@ namespace CourseProject {
 		Test_Form1->ShowDialog();
 	}
 	
-private: System::Void Edit_Test_Click(System::Object^ sender, System::EventArgs^ e) {
-	EditTest^ Edit_Test_Form = gcnew EditTest();
-	Edit_Test_Form->ShowDialog();
-}
+	private: System::Void Edit_Test_Click(System::Object^ sender, System::EventArgs^ e) {
+		EditTest^ Edit_Test_Form = gcnew EditTest();
+		Edit_Test_Form->ShowDialog();
+	}
+	private: System::Void Clear_Test_Button_Click(System::Object^ sender, System::EventArgs^ e) {
+		if (Test::ClearTest())
+		{
+			MessageBox::Show("Error");
+		}
+		else {
+			MessageBox::Show("Success");
+		}
+	}
 };
 }
