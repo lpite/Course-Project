@@ -1,4 +1,54 @@
 ﻿#pragma once
+//
+//████  ████  ████
+//▓▓▒▒▒▒▓▓▒▒▒▒▓▓▓▓▓▓░░▓▓
+//██████████▓▓██▓▓░░▒▒░░░░▒▒▓▓▒▒▓▓▒▒██
+//▓▓▓▓▒▒▒▒▒▒▒▒▒▒▓▓▒▒▓▓██████▒▒▒▒██▓▓▓▓▒▒▒▒██
+//████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓▓▓▓▓▓▓▓▒▒██▓▓▓▓▓▓▓▓▓▓▓▓
+//██▓▓▓▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒██▒▒████▓▓▓▓▓▓██
+//██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒██▒▒░░██▓▓▓▓▓▓██
+//██▒▒▒▒▒▒▒▒▓▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒██▒▒██▓▓▓▓▓▓██
+//██▒▒▒▒▒▒▒▒▓▓▓▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒██▓▓▓▓▓▓▓▓██
+//██▒▒▒▒▒▒▓▓▓▓██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓▓██▓▓▓▓▓▓██
+//██▒▒▒▒▒▒▓▓▓▓████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓▓██▓▓▓▓▓▓▓▓██
+//██▒▒▒▒▓▓▓▓██░░██▒▒▒▒▒▒▓▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓▓▓▓██▓▓▓▓▓▓██
+//██▒▒▒▒▒▒▓▓██░░  ██▒▒▒▒▒▒▓▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓▓▓▓██▓▓▓▓▓▓██
+//██▒▒▒▒▓▓██░░░░░░██▒▒▒▒▓▓██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓▓▓▓▓▓██▓▓▓▓▓▓██
+//██▒▒▒▒▓▓██░░░░░░░░██▒▒▓▓██▒▒▒▒▒▒▒▒▒▒▓▓▒▒▒▒▒▒▒▒▒▒▒▒▓▓▓▓▓▓██▓▓▓▓▓▓██
+//██▒▒▒▒▓▓██░░░░░░░░░░██▒▒██░░██▒▒▒▒▒▒▓▓▓▓▒▒▒▒▒▒▒▒▒▒▓▓▓▓▓▓▓▓██▓▓▓▓▓▓██
+//██▒▒▒▒▓▓██░░░░░░░░░░██▒▒██░░██▒▒▒▒▒▒▓▓▓▓▒▒▒▒▒▒▒▒▓▓▓▓▓▓▓▓██▓▓▓▓▓▓██
+//██▒▒▒▒▓▓██▓▓▓▓░░░░░░  ████░░░░██▒▒▓▓██▓▓▒▒▒▒▒▒▒▒▓▓▓▓▓▓▓▓██▓▓▓▓▓▓██
+//██▒▒▒▒██░░░░░░▓▓░░░░░░░░░░▓▓▓▓▓▓██▓▓██▓▓▒▒▒▒▒▒▓▓▒▒▓▓▓▓▓▓██▓▓▓▓▓▓██
+//██▒▒▒▒████████░░░░░░░░░░▓▓░░░░░░░░██░░██▒▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓██▓▓▓▓▓▓██
+//██▒▒██░░▓▓▓▓██░░░░░░░░░░████████░░░░██▒▒▒▒▓▓██▓▓▓▓▓▓██▓▓▓▓▓▓▓▓██
+//██▒▒██  ▒▒▓▓▓▓░░░░░░░░▓▓░░▓▓▓▓▓▓▓▓░░██▒▒▒▒▓▓████▓▓▓▓██▓▓▓▓▓▓██
+//██▒▒██░░  ▒▒▒▒░░░░░░░░    ▒▒▓▓▓▓░░░░██▒▒▒▒▓▓██░░██▓▓██▓▓▓▓▓▓██
+//██▒▒██░░░░░░░░░░░░░░░░░░  ▒▒▒▒  ░░░░██▒▒▒▒▓▓██░░████▓▓▓▓▓▓▓▓██
+//██▒▒██░░░░░░░░░░  ░░░░░░  ░░░░░░░░░░██▒▒▒▒▓▓██░░██▓▓▓▓▓▓▓▓▓▓██
+//██▒▒██░░░░░░██░░░░░░░░░░░░░░░░░░░░░░██▒▒▓▓██░░██▓▓▓▓▓▓▓▓▓▓▓▓██
+//██▒▒▓▓██  ░░░░░░░░░░░░░░░░░░░░░░░░██▒▒▒▒▓▓████▓▓▓▓▓▓▒▒▓▓▓▓██
+//██▓▓██░░  ░░░░░░░░░░▓▓░░░░░░░░░░██▒▒▒▒▓▓██▓▓▓▓▓▓▓▓▒▒▓▓▓▓██
+//██▒▒██░░░░░░▓▓      ▓▓░░░░░░░░░░██▒▒▓▓████▓▓▓▓▓▓▒▒▓▓▓▓▓▓██
+//██▒▒▓▓██░░░░░░▓▓▓▓▓▓░░░░░░░░░░░░██▒▒▓▓████▓▓▓▓▒▒▒▒▓▓▓▓▓▓██
+//██▓▓▓▓██░░░░░░░░░░░░░░░░░░░░██▒▒▓▓██░░██▓▓▒▒▒▒▒▒▓▓▓▓▓▓██
+//██▒▒██  ██░░░░  ░░░░░░░░██████▒▒▓▓██░░██▒▒▓▓▓▓▓▓▓▓██▓▓██
+//████    ██░░░░░░██████░░░░██▒▒██░░░░██▓▓▓▓▓▓▓▓▓▓██▓▓██
+//██████░░░░░░░░░░██▓▓██░░██░░██▓▓▓▓▓▓▓▓██▓▓██
+//▓▓░░░░██░░░░░░░░██▓▓██░░░░██░░██▓▓▓▓▓▓██  ██▓▓██
+//██  ░░░░██░░░░░░░░████░░░░██  ░░██▓▓▓▓▓▓██    ████
+//██  ░░░░██░░░░░░░░░░░░░░████  ░░██░░██▓▓██
+//██  ░░░░▓▓░░░░░░░░░░░░░░▓▓    ░░░░██░░░░██
+//██  ██░░░░██░░░░░░░░░░░░██    ░░░░██░░░░░░░░██
+//██  ██░░██░░░░░░░░░░░░██    ░░░░░░██░░░░░░░░░░██
+//██▓▓▓▓▓▓██░░░░  ░░▓▓▓▓░░  ░░░░░░▓▓░░░░░░░░░░░░░░▓▓
+//██░░██▓▓████░░░░░░██      ░░░░░░██░░░░░░░░░░░░░░░░██
+//██  ░░██▓▓██░░░░░░██▓▓████  ░░░░██░░░░░░░░    ░░░░░░░░██
+//▓▓░░  ░░██▓▓██░░░░▓▓▒▒▓▓██░░▓▓░░██░░░░░░          ░░░░░░██
+//▓▓██    ░░██▒▒██░░▓▓▒▒▓▓██▒▒░░██▓▓██░░░░░░            ░░░░██
+//██      ░░██▒▒████▒▒▓▓██░░░░░░░░░░░░░░░░              ░░░░░░██
+//██        ░░████▓▓██▓▓██░░░░        ░░░░██                ░░░░██
+//██        ░░██▓▓▒▒▓▓██░░░░            ░░██                ░░░░██
+
 
 #include <stdlib.h>
 #include <array>
@@ -147,6 +197,7 @@ namespace CourseProject {
 			this->Answer_Radio_1->TabStop = true;
 			this->Answer_Radio_1->Text = L"Answer 1";
 			this->Answer_Radio_1->UseVisualStyleBackColor = true;
+			this->Answer_Radio_1->CheckedChanged += gcnew System::EventHandler(this, &Test_Form::Answer_Radio_1_CheckedChanged);
 			// 
 			// Answer_Radio_2
 			// 
@@ -161,6 +212,7 @@ namespace CourseProject {
 			this->Answer_Radio_2->TabStop = true;
 			this->Answer_Radio_2->Text = L"Answer 1";
 			this->Answer_Radio_2->UseVisualStyleBackColor = true;
+			this->Answer_Radio_2->CheckedChanged += gcnew System::EventHandler(this, &Test_Form::Answer_Radio_2_CheckedChanged);
 			// 
 			// Answer_Radio_3
 			// 
@@ -175,6 +227,7 @@ namespace CourseProject {
 			this->Answer_Radio_3->TabStop = true;
 			this->Answer_Radio_3->Text = L"Answer 1";
 			this->Answer_Radio_3->UseVisualStyleBackColor = true;
+			this->Answer_Radio_3->CheckedChanged += gcnew System::EventHandler(this, &Test_Form::Answer_Radio_3_CheckedChanged);
 			// 
 			// Answer_Radio_4
 			// 
@@ -189,6 +242,7 @@ namespace CourseProject {
 			this->Answer_Radio_4->TabStop = true;
 			this->Answer_Radio_4->Text = L"Answer 1";
 			this->Answer_Radio_4->UseVisualStyleBackColor = true;
+			this->Answer_Radio_4->CheckedChanged += gcnew System::EventHandler(this, &Test_Form::Answer_Radio_4_CheckedChanged);
 			// 
 			// Answer_Radio_5
 			// 
@@ -203,6 +257,7 @@ namespace CourseProject {
 			this->Answer_Radio_5->TabStop = true;
 			this->Answer_Radio_5->Text = L"Answer 1";
 			this->Answer_Radio_5->UseVisualStyleBackColor = true;
+			this->Answer_Radio_5->CheckedChanged += gcnew System::EventHandler(this, &Test_Form::Answer_Radio_5_CheckedChanged);
 			// 
 			// Question_Text
 			// 
@@ -214,7 +269,6 @@ namespace CourseProject {
 			this->Question_Text->Size = System::Drawing::Size(460, 140);
 			this->Question_Text->TabIndex = 7;
 			this->Question_Text->Text = L"";
-			this->Question_Text->TextChanged += gcnew System::EventHandler(this, &Test_Form::Question_Text_TextChanged);
 			// 
 			// Next_Question_Button
 			// 
@@ -343,9 +397,10 @@ namespace CourseProject {
 #pragma endregion
 	private: int QuestionNumber = 1;
 	DoublyNode* head = NULL;
+	int SelectedAnswer = 0;
 
 	private:void ChangeAnswers(){
-		auto User = User::GetCurrent()[0];
+		auto UserObject = User::GetCurrent()[0];
 
 		auto Question = Test::GetQuestion(QuestionNumber);
 
@@ -357,7 +412,7 @@ namespace CourseProject {
 			TextBox_Answer2->Text = marshal_as<String^>(Answers[1].Text);
 			TextBox_Answer3->Text = marshal_as<String^>(Answers[2].Text);
 			TextBox_Answer4->Text = marshal_as<String^>(Answers[3].Text);
-			if (User.is_admin)
+			if (UserObject.is_admin)
 			{
 				Answer_Radio_1->Checked = Answers[0].IsTrue;
 				Answer_Radio_2->Checked = Answers[1].IsTrue;
@@ -393,9 +448,6 @@ namespace CourseProject {
 	}
 
 	private: System::Void Test_Form_Load(System::Object^ sender, System::EventArgs^ e) {
-
-	
-
 		auto TestObject = Test::GetTest();
 		auto User = User::GetCurrent()[0];
 		auto Question = Test::GetQuestion(QuestionNumber);
@@ -407,10 +459,13 @@ namespace CourseProject {
 			{
 				tmp->QuestionNumber = i + 1;
 				tmp->SelectedAnswer = 0;
-				tmp->prev = NULL;
-				tmp->next = head;
+				tmp->prev = head;
+				tmp->next = NULL;
+				if (head != NULL)
+				{
+					head->next = tmp;
+				}
 				head = tmp;
-				std::cout << tmp->QuestionNumber << std::endl;
 			}
 		}
 
@@ -419,14 +474,10 @@ namespace CourseProject {
 		{
 			Question_Text->ReadOnly = false;
 			Answer_Radio_1->Text = "+";
-
 			Answer_Radio_2->Text = "+";
-
 			Answer_Radio_3->Text = "+";
 			Answer_Radio_4->Text = "+";
-
 			Answer_Radio_5->Text = "+";
-
 			TextBox_Answer5->Text = "Another";
 			TextBox_Answer5->ReadOnly = true;
 			Save_Test_Button->Visible = true;
@@ -456,40 +507,71 @@ namespace CourseProject {
 		this->Close();
 	}
 	
-	private: System::Void Question_Text_TextChanged(System::Object^ sender, System::EventArgs^ e) {
-
-	}
-	
 	private: System::Void Prev_Question_Button_Click(System::Object^ sender, System::EventArgs^ e) {
 		if (QuestionNumber != 1)
 		{
+			auto UserObject = User::GetCurrent()[0];
+			DoublyNode* tmp = (DoublyNode*)malloc(sizeof(DoublyNode));
+			tmp = head;
+			while (tmp != NULL)
+			{
+				if (tmp->QuestionNumber == QuestionNumber)
+				{
+					tmp->SelectedAnswer = SelectedAnswer;
+					break;
+				}
+				tmp = tmp->next;
+			}
 			QuestionNumber--;
 			Question_Number_Label->Text = "Question "+ Convert::ToString(QuestionNumber);
 			auto Question = Test::GetQuestion(QuestionNumber);
 			Question_Text->Text = marshal_as<String^>(Question.Text);
 			ChangeAnswers();
-
-		/*	DoublyNode* tmp = (DoublyNode*)malloc(sizeof(DoublyNode));
-			tmp = head;
-			while (tmp != NULL)
+			if (!UserObject.is_admin)
 			{
-				std::cout << tmp->QuestionNumber << std::endl;
-				tmp = tmp->next;
-			}*/
-		
+				int NextSelectedAnswer = tmp->next->SelectedAnswer;
+				Answer_Radio_1->Checked = NextSelectedAnswer == 0 ? true : false;
+				Answer_Radio_2->Checked = NextSelectedAnswer == 1 ? true : false;
+				Answer_Radio_3->Checked = NextSelectedAnswer == 2 ? true : false;
+				Answer_Radio_4->Checked = NextSelectedAnswer == 3 ? true : false;
+				Answer_Radio_5->Checked = NextSelectedAnswer == 4 ? true : false;
+			}
 		}
 	}
 	
 	private: System::Void Next_Question_Button_Click(System::Object^ sender, System::EventArgs^ e) {
 		auto test = Test::GetTest();
+		auto UserObject = User::GetCurrent()[0];
+
 		if (QuestionNumber != test.QuestionsCount)
 		{
+			DoublyNode* tmp = (DoublyNode*)malloc(sizeof(DoublyNode));
+			tmp = head;
+			while (tmp != NULL)
+			{
+				if (tmp->QuestionNumber == QuestionNumber)
+				{
+					tmp->SelectedAnswer = SelectedAnswer;
+					break;
+				}
+				tmp = tmp->prev;
+			}
+
 			QuestionNumber++;
 			Question_Number_Label->Text = "Question " + Convert::ToString(QuestionNumber);
 			auto Question = Test::GetQuestion(QuestionNumber);
 			Question_Text->Text = marshal_as<String^>(Question.Text);
 			ChangeAnswers();
+			std::cout << std::endl;
+			if (!UserObject.is_admin) {
+				int NextSelectedAnswer = tmp->next->SelectedAnswer;
 
+				Answer_Radio_1->Checked = NextSelectedAnswer == 0 ? true : false;
+				Answer_Radio_2->Checked = NextSelectedAnswer == 1 ? true : false;
+				Answer_Radio_3->Checked = NextSelectedAnswer == 2 ? true : false;
+				Answer_Radio_4->Checked = NextSelectedAnswer == 3 ? true : false;
+				Answer_Radio_5->Checked = NextSelectedAnswer == 4 ? true : false;
+			}
 		}
 	}
 	private: System::Void Save_Test_Button_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -529,12 +611,31 @@ namespace CourseProject {
 			Answer_Radio_5->Checked
 		};
 
-
-		if (Test::SetAnwers(Question.id, Answers)) {
-			MessageBox::Show("Pishov");
-		}
 		Test::EditQuestion(QuestionNumber, NewText);
+		Question = Test::GetQuestion(QuestionNumber);
+		std::cout << Question.id << std::endl;
+		Sleep(500);
+		if (Test::SetAnwers(QuestionNumber, Answers)) {
+			MessageBox::Show("Error");
+		}
 		
+	}
+	private: System::Void Answer_Radio_1_CheckedChanged(System::Object^ sender, System::EventArgs^ e) {
+		SelectedAnswer = 0;
+	}
+	private: System::Void Answer_Radio_2_CheckedChanged(System::Object^ sender, System::EventArgs^ e) {
+		SelectedAnswer = 1;
+	}
+
+	private: System::Void Answer_Radio_3_CheckedChanged(System::Object^ sender, System::EventArgs^ e) {
+		SelectedAnswer = 2;
+	}
+
+	private: System::Void Answer_Radio_4_CheckedChanged(System::Object^ sender, System::EventArgs^ e) {
+		SelectedAnswer = 3;
+	}
+	private: System::Void Answer_Radio_5_CheckedChanged(System::Object^ sender, System::EventArgs^ e) {
+		SelectedAnswer = 4;
 	}
 };
 }

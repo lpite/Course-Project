@@ -158,6 +158,7 @@ int Test::EditQuestion(int QuestionNumber, std::string NewText) {
 	}
 	catch (const std::system_error& e)
 	{
+		std::cout << "EDIT QUESTION" << std::endl;
 		std::cout << e.what();
 		return 1;
 	}
@@ -167,12 +168,14 @@ int Test::ClearTest() {
 	try
 	{
 		storage.sync_schema();
+		storage.remove_all<Test::ANSWER>();
 		storage.remove_all<Test::QUESTION>();
 		storage.remove_all<Test::TEST>();
 		return 0;
 	}
 	catch (const std::system_error& e)
 	{
+		std::cout << "CLEAR TEST" << std::endl;
 		std::cout << e.what();
 		return 1;
 	}
@@ -182,7 +185,6 @@ int Test::SetAnwers(int QuestionId,std::array<Test::ANSWER,5>& Answers) {
 	try
 	{
 		storage.sync_schema();
-		storage.remove_all<Test::ANSWER>(where(c(&Test::ANSWER::QuestionId) == QuestionId));
 		if (!Answers.size())
 		{
 			std::cout << Answers.size() << std::endl;
@@ -190,6 +192,8 @@ int Test::SetAnwers(int QuestionId,std::array<Test::ANSWER,5>& Answers) {
 		}
 		for (int i = 0; i < 5; i++)
 		{
+			storage.remove_all<Test::ANSWER>(where(c(&Test::ANSWER::QuestionId) == QuestionId));
+
 			auto Answer = Answers[i];
 		
 			std::cout << Answer.Text << Answer.IsTrue << std::endl;
@@ -200,6 +204,7 @@ int Test::SetAnwers(int QuestionId,std::array<Test::ANSWER,5>& Answers) {
 	}
 	catch (const std::system_error& e)
 	{
+		std::cout << "SET ANSWERS" << std::endl;
 		std::cout << e.what();
 		return 1;
 	}

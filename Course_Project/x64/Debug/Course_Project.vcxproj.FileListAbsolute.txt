@@ -1,0 +1,9 @@
+C:\Users\student\Downloads\Course-Project-main(1)\Course-Project-main\Course_Project\x64\Debug\Course_Project.vcxproj.AssemblyReference.cache
+C:\Users\student\Downloads\Course-Project-main(1)\Course-Project-main\Course_Project\x64\Debug\CourseProject.Forms.Auth.resources
+C:\Users\student\Downloads\Course-Project-main(1)\Course-Project-main\Course_Project\x64\Debug\CourseProject.Forms.EditTest.resources
+C:\Users\student\Downloads\Course-Project-main(1)\Course-Project-main\Course_Project\x64\Debug\CourseProject.Forms.Main.resources
+C:\Users\student\Downloads\Course-Project-main(1)\Course-Project-main\Course_Project\x64\Debug\CourseProject.Forms.Start.resources
+C:\Users\student\Downloads\Course-Project-main(1)\Course-Project-main\Course_Project\x64\Debug\CourseProject.Forms.Test_Form.resources
+C:\Users\student\Downloads\Course-Project-main(1)\Course-Project-main\Course_Project\x64\Debug\CourseProject.Forms.Text_For_Test.resources
+C:\Users\student\Downloads\Course-Project-main(1)\Course-Project-main\Course_Project\x64\Debug\Course_Project.vcxproj.GenerateResource.cache
+C:\Users\student\Downloads\Course-Project-main(1)\Course-Project-main\Course_Project\x64\Debug\Course_Project.vcxproj.CopyComplete

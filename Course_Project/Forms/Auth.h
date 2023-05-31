@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include <string>
 #include <iostream>
 #include <stdlib.h>
@@ -82,7 +82,7 @@ namespace CourseProject {
 			this->Sign_In_Button->Location = System::Drawing::Point(255, 298);
 			this->Sign_In_Button->Name = L"Sign_In_Button";
 			this->Sign_In_Button->Size = System::Drawing::Size(250, 40);
-			this->Sign_In_Button->TabIndex = 0;
+			this->Sign_In_Button->TabIndex = 3;
 			this->Sign_In_Button->Text = L"Sign in";
 			this->Sign_In_Button->UseVisualStyleBackColor = false;
 			this->Sign_In_Button->Click += gcnew System::EventHandler(this, &Auth::Sign_In_Button_Click);
@@ -94,8 +94,9 @@ namespace CourseProject {
 				| System::Windows::Forms::AnchorStyles::Right));
 			this->Password_Input->Location = System::Drawing::Point(295, 251);
 			this->Password_Input->Name = L"Password_Input";
+			this->Password_Input->PasswordChar = '※';
 			this->Password_Input->Size = System::Drawing::Size(168, 29);
-			this->Password_Input->TabIndex = 1;
+			this->Password_Input->TabIndex = 2;
 			// 
 			// Login_Input
 			// 
@@ -106,7 +107,7 @@ namespace CourseProject {
 			this->Login_Input->Location = System::Drawing::Point(295, 204);
 			this->Login_Input->Name = L"Login_Input";
 			this->Login_Input->Size = System::Drawing::Size(168, 29);
-			this->Login_Input->TabIndex = 2;
+			this->Login_Input->TabIndex = 1;
 			// 
 			// Text_Label
 			// 

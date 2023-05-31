@@ -1,0 +1,23 @@
+﻿  Auth.cpp
+C:\Users\student\Downloads\Course-Project-main(1)\Course-Project-main\Course_Project\Forms\EditTest.h(150,13): warning C4244: 'initializing': conversion from '__int64' to 'int', possible loss of data
+C:\Users\student\Downloads\Course-Project-main(1)\Course-Project-main\Course_Project\Forms\EditTest.h(151,14): warning C4244: 'initializing': conversion from 'unsigned __int64' to 'int', possible loss of data
+C:\Users\student\Downloads\Course-Project-main(1)\Course-Project-main\Course_Project\Forms\Auth.h(97,41): warning C4566: character represented by universal-character-name '\u203B' cannot be represented in the current code page (1251)
+  Main.cpp
+C:\Users\student\Downloads\Course-Project-main(1)\Course-Project-main\Course_Project\Forms\EditTest.h(150,13): warning C4244: 'initializing': conversion from '__int64' to 'int', possible loss of data
+C:\Users\student\Downloads\Course-Project-main(1)\Course-Project-main\Course_Project\Forms\EditTest.h(151,14): warning C4244: 'initializing': conversion from 'unsigned __int64' to 'int', possible loss of data
+  Test_Form.cpp
+  Program.cpp
+C:\Users\student\Downloads\Course-Project-main(1)\Course-Project-main\Course_Project\Forms\EditTest.h(150,13): warning C4244: 'initializing': conversion from '__int64' to 'int', possible loss of data
+C:\Users\student\Downloads\Course-Project-main(1)\Course-Project-main\Course_Project\Forms\EditTest.h(151,14): warning C4244: 'initializing': conversion from 'unsigned __int64' to 'int', possible loss of data
+C:\Users\student\Downloads\Course-Project-main(1)\Course-Project-main\Course_Project\Forms\Auth.h(97,41): warning C4566: character represented by universal-character-name '\u203B' cannot be represented in the current code page (1251)
+  Generating Code...
+  User.obj : MSIL module encountered; incremental linking is disabled for MSIL; performing full link
+Test.obj : warning LNK4248: unresolved typeref token (01000017) for 'sqlite3'; image may not run
+User.obj : warning LNK4248: unresolved typeref token (01000017) for 'sqlite3'; image may not run
+Test.obj : warning LNK4248: unresolved typeref token (01000018) for 'sqlite3_stmt'; image may not run
+User.obj : warning LNK4248: unresolved typeref token (01000018) for 'sqlite3_stmt'; image may not run
+Test.obj : warning LNK4248: unresolved typeref token (01000019) for 'sqlite3_value'; image may not run
+User.obj : warning LNK4248: unresolved typeref token (01000019) for 'sqlite3_value'; image may not run
+Test.obj : warning LNK4248: unresolved typeref token (0100001A) for 'sqlite3_context'; image may not run
+User.obj : warning LNK4248: unresolved typeref token (0100001A) for 'sqlite3_context'; image may not run
+  Course_Project.vcxproj -> C:\Users\student\Downloads\Course-Project-main(1)\Course-Project-main\x64\Debug\Course_Project.exe
