@@ -121,7 +121,7 @@ namespace CourseProject {
 		}
 #pragma endregion
 	private: System::Void Text_For_Test_Load(System::Object^ sender, System::EventArgs^ e) {
-		auto user = User::GetCurrent()[0];
+		auto user = User::GetCurrent();
 		if (user.is_admin)
 		{
 			Save_Information_Button->Visible = true;

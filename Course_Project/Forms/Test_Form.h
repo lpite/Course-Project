@@ -64,6 +64,7 @@
 typedef struct DoublyNode {
 	int QuestionNumber;
 	int SelectedAnswer;
+	bool IsSelectedAnswerRight;
 	struct DoublyNode* next;
 	struct DoublyNode* prev;
 } DoublyNode;
@@ -125,6 +126,10 @@ namespace CourseProject {
 
 	private: System::Windows::Forms::TextBox^ TextBox_Answer2;
 	private: System::Windows::Forms::TextBox^ TextBox_Answer5;
+	private: System::Windows::Forms::Timer^ timer1;
+	private: System::Windows::Forms::ProgressBar^ progressBar1;
+	private: System::Windows::Forms::Label^ label2;
+	private: System::ComponentModel::IContainer^ components;
 
 
 	protected:
@@ -133,7 +138,7 @@ namespace CourseProject {
 		/// <summary>
 		/// Required designer variable.
 		/// </summary>
-		System::ComponentModel::Container ^components;
+
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
@@ -142,6 +147,7 @@ namespace CourseProject {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			this->components = (gcnew System::ComponentModel::Container());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->Finish_Test_Button = (gcnew System::Windows::Forms::Button());
 			this->Answer_Radio_1 = (gcnew System::Windows::Forms::RadioButton());
@@ -159,6 +165,9 @@ namespace CourseProject {
 			this->TextBox_Answer3 = (gcnew System::Windows::Forms::TextBox());
 			this->TextBox_Answer2 = (gcnew System::Windows::Forms::TextBox());
 			this->TextBox_Answer5 = (gcnew System::Windows::Forms::TextBox());
+			this->timer1 = (gcnew System::Windows::Forms::Timer(this->components));
+			this->progressBar1 = (gcnew System::Windows::Forms::ProgressBar());
+			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->SuspendLayout();
 			// 
 			// label1
@@ -363,11 +372,39 @@ namespace CourseProject {
 			this->TextBox_Answer5->Size = System::Drawing::Size(112, 26);
 			this->TextBox_Answer5->TabIndex = 15;
 			// 
+			// timer1
+			// 
+			this->timer1->Enabled = true;
+			this->timer1->Interval = 1000;
+			this->timer1->Tick += gcnew System::EventHandler(this, &Test_Form::timer1_Tick);
+			// 
+			// progressBar1
+			// 
+			this->progressBar1->Location = System::Drawing::Point(459, 9);
+			this->progressBar1->Name = L"progressBar1";
+			this->progressBar1->Size = System::Drawing::Size(288, 19);
+			this->progressBar1->Step = 1;
+			this->progressBar1->Style = System::Windows::Forms::ProgressBarStyle::Continuous;
+			this->progressBar1->TabIndex = 16;
+			// 
+			// label2
+			// 
+			this->label2->AutoSize = true;
+			this->label2->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->label2->Location = System::Drawing::Point(409, 11);
+			this->label2->Name = L"label2";
+			this->label2->Size = System::Drawing::Size(39, 17);
+			this->label2->TabIndex = 17;
+			this->label2->Text = L"Time";
+			// 
 			// Test_Form
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(1264, 681);
+			this->Controls->Add(this->label2);
+			this->Controls->Add(this->progressBar1);
 			this->Controls->Add(this->TextBox_Answer5);
 			this->Controls->Add(this->TextBox_Answer2);
 			this->Controls->Add(this->TextBox_Answer3);
@@ -389,6 +426,7 @@ namespace CourseProject {
 			this->Name = L"Test_Form";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Test";
+			this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &Test_Form::Test_Form_FormClosing);
 			this->Load += gcnew System::EventHandler(this, &Test_Form::Test_Form_Load);
 			this->ResumeLayout(false);
 			this->PerformLayout();
@@ -397,10 +435,11 @@ namespace CourseProject {
 #pragma endregion
 	private: int QuestionNumber = 1;
 	DoublyNode* head = NULL;
-	int SelectedAnswer = 0;
-
+	int SelectedAnswer = -1;
+	int TestTime = 0;
+	int CurrentTestTime = 0;
 	private:void ChangeAnswers(){
-		auto UserObject = User::GetCurrent()[0];
+		auto UserObject = User::GetCurrent();
 
 		auto Question = Test::GetQuestion(QuestionNumber);
 
@@ -449,16 +488,20 @@ namespace CourseProject {
 
 	private: System::Void Test_Form_Load(System::Object^ sender, System::EventArgs^ e) {
 		auto TestObject = Test::GetTest();
-		auto User = User::GetCurrent()[0];
+		auto User = User::GetCurrent();
 		auto Question = Test::GetQuestion(QuestionNumber);
 		auto Answers = Test::GetAnswers(Question.id);
 
+		progressBar1->Maximum = TestObject.Time;
+
+		TestTime = TestObject.Time;
 		for (int i = 0; i < TestObject.QuestionsCount; ++i) {
 			DoublyNode* tmp = (DoublyNode*)malloc(sizeof(DoublyNode));
 			if (tmp)
 			{
 				tmp->QuestionNumber = i + 1;
-				tmp->SelectedAnswer = 0;
+				tmp->SelectedAnswer = -1;
+				tmp->IsSelectedAnswerRight = false;
 				tmp->prev = head;
 				tmp->next = NULL;
 				if (head != NULL)
@@ -481,6 +524,7 @@ namespace CourseProject {
 			TextBox_Answer5->Text = "Another";
 			TextBox_Answer5->ReadOnly = true;
 			Save_Test_Button->Visible = true;
+			timer1->Stop();
 		}
 		else {
 			TextBox_Answer1->Visible = false;
@@ -490,7 +534,7 @@ namespace CourseProject {
 			TextBox_Answer5->Visible = false;
 
 		}
-		if (Answers.size() && !User.is_admin)
+		if (Answers.size() == 5 && !User.is_admin)
 		{
 			Answer_Radio_1->Text = marshal_as<String^>(Answers[0].Text);
 			Answer_Radio_2->Text = marshal_as<String^>(Answers[1].Text);
@@ -504,73 +548,132 @@ namespace CourseProject {
 
 	}
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
-		this->Close();
+		auto User = User::GetCurrent();
+		auto Test = Test::GetTest();
+		if (!User.is_admin)
+		{
+			auto Result = MessageBox::Show("Are you sure you want to finish test ?", "Confirm", MessageBoxButtons::YesNo);
+			if (Result == System::Windows::Forms::DialogResult::Yes)
+			{
+				timer1->Stop();
+				double Score = 5.0 / Test.QuestionsCount;
+				double Count = 0;
+				DoublyNode* tmp = (DoublyNode*)malloc(sizeof(DoublyNode));
+				tmp = head;
+				while (tmp != NULL)
+				{
+					std::cout << tmp->QuestionNumber << " " << tmp->IsSelectedAnswerRight << std::endl;
+					if (tmp->IsSelectedAnswerRight)
+					{
+						Count++;
+					}
+					tmp = tmp->prev;
+				}
+				std::cout << Score << Count;
+				Test::SaveHistory(User.UserId, round(Count * Score));
+				MessageBox::Show("Your score is " + Convert::ToString(round(Count * Score)) + "/5");
+				this->Close();
+			}
+		}
+		else {
+			this->Close();
+		}
 	}
 	
 	private: System::Void Prev_Question_Button_Click(System::Object^ sender, System::EventArgs^ e) {
 		if (QuestionNumber != 1)
 		{
-			auto UserObject = User::GetCurrent()[0];
+			auto UserObject = User::GetCurrent();
 			DoublyNode* tmp = (DoublyNode*)malloc(sizeof(DoublyNode));
 			tmp = head;
 			while (tmp != NULL)
 			{
 				if (tmp->QuestionNumber == QuestionNumber)
 				{
-					tmp->SelectedAnswer = SelectedAnswer;
+					if (SelectedAnswer != -1)
+					{
+						tmp->SelectedAnswer = SelectedAnswer;
+					}
 					break;
 				}
-				tmp = tmp->next;
+				tmp = tmp->prev;
 			}
 			QuestionNumber--;
 			Question_Number_Label->Text = "Question "+ Convert::ToString(QuestionNumber);
 			auto Question = Test::GetQuestion(QuestionNumber);
 			Question_Text->Text = marshal_as<String^>(Question.Text);
+			auto Answers = Test::GetAnswers(Question.id);
+
 			ChangeAnswers();
 			if (!UserObject.is_admin)
-			{
-				int NextSelectedAnswer = tmp->next->SelectedAnswer;
+			{			
+				int NextSelectedAnswer = tmp->prev->SelectedAnswer;
+				if (SelectedAnswer != -1 && Answers.size())
+				{
+					tmp->IsSelectedAnswerRight = Answers[SelectedAnswer].IsTrue;
+
+				}
 				Answer_Radio_1->Checked = NextSelectedAnswer == 0 ? true : false;
 				Answer_Radio_2->Checked = NextSelectedAnswer == 1 ? true : false;
 				Answer_Radio_3->Checked = NextSelectedAnswer == 2 ? true : false;
 				Answer_Radio_4->Checked = NextSelectedAnswer == 3 ? true : false;
 				Answer_Radio_5->Checked = NextSelectedAnswer == 4 ? true : false;
+				SelectedAnswer = -1;
 			}
 		}
 	}
 	
 	private: System::Void Next_Question_Button_Click(System::Object^ sender, System::EventArgs^ e) {
 		auto test = Test::GetTest();
-		auto UserObject = User::GetCurrent()[0];
+		auto UserObject = User::GetCurrent();
+
+		DoublyNode* tmp = (DoublyNode*)malloc(sizeof(DoublyNode));
+		tmp = head;
+		while (tmp != NULL)
+		{
+			if (tmp->QuestionNumber == QuestionNumber)
+			{
+				if (SelectedAnswer != -1)
+				{
+					tmp->SelectedAnswer = SelectedAnswer;
+				}
+				break;
+			}
+			tmp = tmp->prev;
+		}
 
 		if (QuestionNumber != test.QuestionsCount)
 		{
-			DoublyNode* tmp = (DoublyNode*)malloc(sizeof(DoublyNode));
-			tmp = head;
-			while (tmp != NULL)
-			{
-				if (tmp->QuestionNumber == QuestionNumber)
-				{
-					tmp->SelectedAnswer = SelectedAnswer;
-					break;
-				}
-				tmp = tmp->prev;
-			}
-
 			QuestionNumber++;
 			Question_Number_Label->Text = "Question " + Convert::ToString(QuestionNumber);
 			auto Question = Test::GetQuestion(QuestionNumber);
 			Question_Text->Text = marshal_as<String^>(Question.Text);
+			auto Answers = Test::GetAnswers(Question.id);
 			ChangeAnswers();
-			std::cout << std::endl;
 			if (!UserObject.is_admin) {
 				int NextSelectedAnswer = tmp->next->SelectedAnswer;
-
+				if (SelectedAnswer != -1 && Answers.size())
+				{
+					tmp->IsSelectedAnswerRight = Answers[SelectedAnswer].IsTrue;
+				}
 				Answer_Radio_1->Checked = NextSelectedAnswer == 0 ? true : false;
 				Answer_Radio_2->Checked = NextSelectedAnswer == 1 ? true : false;
 				Answer_Radio_3->Checked = NextSelectedAnswer == 2 ? true : false;
 				Answer_Radio_4->Checked = NextSelectedAnswer == 3 ? true : false;
 				Answer_Radio_5->Checked = NextSelectedAnswer == 4 ? true : false;
+				SelectedAnswer = -1;
+			}
+
+		}
+		else {
+			auto Question = Test::GetQuestion(QuestionNumber);
+			auto Answers = Test::GetAnswers(Question.id);
+
+			if (SelectedAnswer != -1 && Answers.size())
+			{
+				if (tmp) {
+					tmp->IsSelectedAnswerRight = Answers[SelectedAnswer].IsTrue;
+				}
 			}
 		}
 	}
@@ -611,11 +714,12 @@ namespace CourseProject {
 			Answer_Radio_5->Checked
 		};
 
-		Test::EditQuestion(QuestionNumber, NewText);
+		if (Test::EditQuestion(QuestionNumber, NewText)) {
+			MessageBox::Show("Error");
+		};
 		Question = Test::GetQuestion(QuestionNumber);
 		std::cout << Question.id << std::endl;
-		Sleep(500);
-		if (Test::SetAnwers(QuestionNumber, Answers)) {
+		if (Test::SetAnwers(Question.id, Answers)) {
 			MessageBox::Show("Error");
 		}
 		
@@ -636,6 +740,41 @@ namespace CourseProject {
 	}
 	private: System::Void Answer_Radio_5_CheckedChanged(System::Object^ sender, System::EventArgs^ e) {
 		SelectedAnswer = 4;
+	}
+	private: System::Void timer1_Tick(System::Object^ sender, System::EventArgs^ e) {
+		if (TestTime <= CurrentTestTime)
+		{
+			timer1->Stop();
+			auto User = User::GetCurrent();
+			auto Test = Test::GetTest();
+				double Score = 5.0 / Test.QuestionsCount;
+				double Count = 0;
+				DoublyNode* tmp = (DoublyNode*)malloc(sizeof(DoublyNode));
+				tmp = head;
+				while (tmp != NULL)
+				{
+					std::cout << tmp->QuestionNumber << " " << tmp->IsSelectedAnswerRight << std::endl;
+					if (tmp->IsSelectedAnswerRight)
+					{
+						Count++;
+					}
+					tmp = tmp->prev;
+				}
+				std::cout << Score << Count;
+				Test::SaveHistory(User.UserId, round(Count * Score));
+				MessageBox::Show("Time is up");
+				MessageBox::Show("Your score is " + Convert::ToString(round(Count * Score)) + "/5");
+				this->Close();
+			
+		}
+		else {
+			progressBar1->Value = CurrentTestTime+1;
+			std::cout << progressBar1->Value << std::endl;
+			CurrentTestTime++;
+		}
+	}
+	private: System::Void Test_Form_FormClosing(System::Object^ sender, System::Windows::Forms::FormClosingEventArgs^ e) {
+		timer1->Stop();
 	}
 };
 }

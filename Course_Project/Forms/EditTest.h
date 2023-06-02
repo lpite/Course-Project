@@ -42,6 +42,8 @@ namespace CourseProject {
 	private: System::Windows::Forms::Button^ Save_Test_Button;
 	private: System::Windows::Forms::Label^ label1;
 	private: System::Windows::Forms::Label^ label2;
+	private: System::Windows::Forms::Label^ Score_For_One_Question_Label;
+
 
 	protected:
 
@@ -65,6 +67,7 @@ namespace CourseProject {
 			this->Save_Test_Button = (gcnew System::Windows::Forms::Button());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->label2 = (gcnew System::Windows::Forms::Label());
+			this->Score_For_One_Question_Label = (gcnew System::Windows::Forms::Label());
 			this->SuspendLayout();
 			// 
 			// Questions_Count_TextBox
@@ -72,9 +75,11 @@ namespace CourseProject {
 			this->Questions_Count_TextBox->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14, System::Drawing::FontStyle::Regular,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
 			this->Questions_Count_TextBox->Location = System::Drawing::Point(12, 104);
+			this->Questions_Count_TextBox->MaxLength = 2;
 			this->Questions_Count_TextBox->Name = L"Questions_Count_TextBox";
 			this->Questions_Count_TextBox->Size = System::Drawing::Size(107, 29);
 			this->Questions_Count_TextBox->TabIndex = 0;
+			this->Questions_Count_TextBox->TextChanged += gcnew System::EventHandler(this, &EditTest::Questions_Count_TextBox_TextChanged);
 			// 
 			// Time_TextBox
 			// 
@@ -84,6 +89,7 @@ namespace CourseProject {
 			this->Time_TextBox->Name = L"Time_TextBox";
 			this->Time_TextBox->Size = System::Drawing::Size(108, 29);
 			this->Time_TextBox->TabIndex = 1;
+			this->Time_TextBox->TextChanged += gcnew System::EventHandler(this, &EditTest::Time_TextBox_TextChanged);
 			// 
 			// Save_Test_Button
 			// 
@@ -119,11 +125,23 @@ namespace CourseProject {
 			this->label2->TabIndex = 4;
 			this->label2->Text = L"Time for test";
 			// 
+			// Score_For_One_Question_Label
+			// 
+			this->Score_For_One_Question_Label->AutoSize = true;
+			this->Score_For_One_Question_Label->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14, System::Drawing::FontStyle::Regular,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
+			this->Score_For_One_Question_Label->Location = System::Drawing::Point(8, 229);
+			this->Score_For_One_Question_Label->Name = L"Score_For_One_Question_Label";
+			this->Score_For_One_Question_Label->Size = System::Drawing::Size(219, 24);
+			this->Score_For_One_Question_Label->TabIndex = 5;
+			this->Score_For_One_Question_Label->Text = L"score for one question = ";
+			// 
 			// EditTest
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(784, 561);
+			this->Controls->Add(this->Score_For_One_Question_Label);
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->Save_Test_Button);
@@ -159,10 +177,31 @@ namespace CourseProject {
 				this->Close();
 			}
 		}
-		catch (const std::exception&)
+		catch (Exception^ ex)
 		{
 			std::cout << "Error";
 		}
+	}
+	private: System::Void Questions_Count_TextBox_TextChanged(System::Object^ sender, System::EventArgs^ e) {
+		try
+		{			
+			if (Questions_Count_TextBox->Text->Length)
+			{
+				double QuestionCount = Convert::ToDouble(Questions_Count_TextBox->Text);
+				
+				Score_For_One_Question_Label->Text = "score for one question = " + (5 / QuestionCount).ToString("F2");
+			}
+			else {
+				Questions_Count_TextBox->Text = "15";
+			}
+		}
+		catch (Exception^ ex)
+		{
+			Questions_Count_TextBox->Text = "";
+		}
+	}
+	private: System::Void Time_TextBox_TextChanged(System::Object^ sender, System::EventArgs^ e) {
+	
 	}
 };
 }

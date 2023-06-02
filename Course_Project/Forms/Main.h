@@ -9,6 +9,8 @@
 #include "Text_For_Test.h"
 #include "Test_Form.h"
 #include "EditTest.h"
+#include "History_Form.h"
+
 
 
 namespace CourseProject {
@@ -120,6 +122,7 @@ namespace CourseProject {
 			this->History_Button->Text = L"History";
 			this->History_Button->UseVisualStyleBackColor = true;
 			this->History_Button->Visible = false;
+			this->History_Button->Click += gcnew System::EventHandler(this, &Main::History_Button_Click);
 			// 
 			// Edit_Test
 			// 
@@ -166,7 +169,7 @@ namespace CourseProject {
 #pragma endregion
 	private: System::Void Main_Load(System::Object^ sender, System::EventArgs^ e) {
 		
-		auto user = User::GetCurrent()[0];
+		auto user = User::GetCurrent();
 		Greeting_Label->Text = "Hello " + marshal_as<String^>(user.login);
 		if (user.is_admin)
 		{
@@ -204,6 +207,10 @@ namespace CourseProject {
 		else {
 			MessageBox::Show("Success");
 		}
+	}
+	private: System::Void History_Button_Click(System::Object^ sender, System::EventArgs^ e) {
+		History_Form^ HistoryForm = gcnew History_Form();
+		HistoryForm->ShowDialog();
 	}
 };
 }

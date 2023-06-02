@@ -25,6 +25,12 @@ namespace Test {
 		bool IsTrue;
 	};
 
+	struct HISTORY{
+		int Id;
+		int UserId;
+		double score;
+	};
+
 	int EditTestText(std::string Text);
 	int SetTestTimeAndQuestionsCount(int Time, int Count);
 	TEST GetTest();
@@ -33,5 +39,8 @@ namespace Test {
 	int EditQuestion(int QuestionNumber,std::string NewText);
 	int ClearTest();
 	int SetAnwers(int QuestionId, std::array<Test::ANSWER, 5>& Answers);
+	int SaveHistory(int UserId,int Score);
+	int ClearHistory();
+	std::vector<Test::HISTORY, std::allocator<Test::HISTORY>> GetHistory();
 
 }

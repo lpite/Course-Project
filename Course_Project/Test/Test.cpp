@@ -2,6 +2,8 @@
 #include <iostream>
 
 #include "Test.h"
+#include "../Auth/User.h"
+
 using namespace sqlite_orm;
 
 auto storage = make_storage(
@@ -21,7 +23,12 @@ auto storage = make_storage(
 		make_column("question_id", &Test::ANSWER::QuestionId),
 		make_column("text", &Test::ANSWER::Text),
 		make_column("is_true", &Test::ANSWER::IsTrue),
-		foreign_key(&Test::ANSWER::QuestionId).references(&Test::QUESTION::id))
+		foreign_key(&Test::ANSWER::QuestionId).references(&Test::QUESTION::id)),
+	make_table("history",
+		make_column("id", &Test::HISTORY::Id),
+		make_column("user_id", &Test::HISTORY::UserId),
+		make_column("score", &Test::HISTORY::score)
+	)
 );
 
 
@@ -190,12 +197,16 @@ int Test::SetAnwers(int QuestionId,std::array<Test::ANSWER,5>& Answers) {
 			std::cout << Answers.size() << std::endl;
 			return 1;
 		}
-		for (int i = 0; i < 5; i++)
+		auto PrevAnswers = storage.get_all<Test::ANSWER>(where(c(&Test::ANSWER::QuestionId) == QuestionId));
+		if (PrevAnswers.size())
 		{
 			storage.remove_all<Test::ANSWER>(where(c(&Test::ANSWER::QuestionId) == QuestionId));
+		}
 
+		for (int i = 0; i < 5; i++)
+		{
 			auto Answer = Answers[i];
-		
+			Answer.QuestionId = QuestionId;
 			std::cout << Answer.Text << Answer.IsTrue << std::endl;
 			Test::ANSWER NsAnswer;
 			storage.insert(Answer);
@@ -226,5 +237,51 @@ std::vector<Test::ANSWER,std::allocator<Test::ANSWER>> Test::GetAnswers(int Ques
 		std::cout << e.what();
 		return std::vector<Test::ANSWER, std::allocator<Test::ANSWER>>{};
 
+	}
+}
+
+int Test::SaveHistory(int UserId, int Score) {
+	try
+	{
+		storage.sync_schema();
+		Test::HISTORY History = {
+			-1,
+			UserId,
+			Score
+		};
+		storage.insert(History);
+		return 0;
+	}
+	catch (const std::system_error& e)
+	{
+		std::cout << e.what();
+		return 1;
+	}
+}
+
+std::vector<Test::HISTORY, std::allocator<Test::HISTORY>> Test::GetHistory() {
+	try
+	{
+		storage.sync_schema();
+		auto ResultsHistory = storage.get_all<Test::HISTORY>();
+		return ResultsHistory;
+	}
+	catch (const std::system_error& e)
+	{
+		return std::vector<Test::HISTORY, std::allocator<Test::HISTORY>>{};
+	}
+}
+
+int Test::ClearHistory() {
+	try
+	{
+		storage.sync_schema();
+		storage.remove_all<Test::HISTORY>();
+		return 0;
+	}
+	catch (const std::system_error& e)
+	{
+		std::cout << e.what();
+		return 1;
 	}
 }

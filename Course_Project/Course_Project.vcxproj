@@ -45,7 +45,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <CLRSupport>true</CLRSupport>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -125,6 +125,7 @@
     <ClCompile Include="Auth\User.cpp" />
     <ClCompile Include="Forms\Auth.cpp" />
     <ClCompile Include="Forms\EditTest.cpp" />
+    <ClCompile Include="Forms\History_Form.cpp" />
     <ClCompile Include="Forms\Main.cpp" />
     <ClCompile Include="Forms\Start.cpp" />
     <ClCompile Include="Forms\Test_Form.cpp" />
@@ -138,6 +139,9 @@
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="Forms\EditTest.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="Forms\History_Form.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="Forms\Main.h">
@@ -160,6 +164,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\EditTest.resx">
       <DependentUpon>Forms\EditTest.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\History_Form.resx">
+      <DependentUpon>Forms\History_Form.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Main.resx">
       <DependentUpon>Forms\Main.h</DependentUpon>

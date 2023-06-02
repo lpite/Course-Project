@@ -3,17 +3,19 @@
 #include <vector>
 
 namespace User {
-    struct USER {
+  public struct USER {
         int id;
         std::string login;
         std::string password;
         bool is_admin;
     };
-    struct CURRENT_USER {
+  public struct CURRENT_USER {
+        int UserId;
         std::string login;
         bool is_admin;
     };
 	int SignUp(std::string login,std::string password);
 	int SignIn(std::string login, std::string password);
-    std::vector<User::CURRENT_USER,std::allocator<User::CURRENT_USER>> GetCurrent();
+    User::CURRENT_USER GetCurrent();
+    User::USER GetUser(int UserId);
 }
