@@ -94,6 +94,7 @@ namespace CourseProject {
 			this->button1->TabIndex = 2;
 			this->button1->Text = L"Start";
 			this->button1->UseVisualStyleBackColor = false;
+			this->button1->Click += gcnew System::EventHandler(this, &Start::button1_Click);
 			// 
 			// Start
 			// 
@@ -111,5 +112,8 @@ namespace CourseProject {
 
 		}
 #pragma endregion
+	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
+		this->Close();
+	}
 	};
 }

@@ -10,6 +10,7 @@
 #include "Test_Form.h"
 #include "EditTest.h"
 #include "History_Form.h"
+#include "Start.h"
 
 
 
@@ -53,6 +54,7 @@ namespace CourseProject {
 	private: System::Windows::Forms::Button^ History_Button;
 	private: System::Windows::Forms::Button^ Edit_Test;
 	private: System::Windows::Forms::Button^ Clear_Test_Button;
+	private: System::Windows::Forms::Button^ About_Button;
 
 
 	protected:
@@ -80,6 +82,7 @@ namespace CourseProject {
 			this->History_Button = (gcnew System::Windows::Forms::Button());
 			this->Edit_Test = (gcnew System::Windows::Forms::Button());
 			this->Clear_Test_Button = (gcnew System::Windows::Forms::Button());
+			this->About_Button = (gcnew System::Windows::Forms::Button());
 			this->SuspendLayout();
 			// 
 			// To_Test_Button
@@ -146,11 +149,23 @@ namespace CourseProject {
 			this->Clear_Test_Button->Visible = false;
 			this->Clear_Test_Button->Click += gcnew System::EventHandler(this, &Main::Clear_Test_Button_Click);
 			// 
+			// About_Button
+			// 
+			this->About_Button->Location = System::Drawing::Point(12, 289);
+			this->About_Button->Name = L"About_Button";
+			this->About_Button->Size = System::Drawing::Size(89, 34);
+			this->About_Button->TabIndex = 6;
+			this->About_Button->Text = L"About";
+			this->About_Button->UseVisualStyleBackColor = true;
+			this->About_Button->Visible = false;
+			this->About_Button->Click += gcnew System::EventHandler(this, &Main::About_Button_Click);
+			// 
 			// Main
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(784, 561);
+			this->Controls->Add(this->About_Button);
 			this->Controls->Add(this->Clear_Test_Button);
 			this->Controls->Add(this->Edit_Test);
 			this->Controls->Add(this->History_Button);
@@ -168,7 +183,11 @@ namespace CourseProject {
 		}
 #pragma endregion
 	private: System::Void Main_Load(System::Object^ sender, System::EventArgs^ e) {
-		
+		this->Hide();
+		Start^ StartForm = gcnew Start();
+		StartForm->ShowDialog();
+		this->Show();
+
 		auto user = User::GetCurrent();
 		Greeting_Label->Text = "Hello " + marshal_as<String^>(user.login);
 		if (user.is_admin)
@@ -177,6 +196,7 @@ namespace CourseProject {
 			To_Test_Button->Text = "Edit tests";
 			Edit_Test->Visible = true;
 			Clear_Test_Button->Visible = true;
+			About_Button->Visible = true;
 		}
 	}
 
@@ -212,5 +232,9 @@ namespace CourseProject {
 		History_Form^ HistoryForm = gcnew History_Form();
 		HistoryForm->ShowDialog();
 	}
+private: System::Void About_Button_Click(System::Object^ sender, System::EventArgs^ e) {
+	Start^ StartForm = gcnew Start();
+	StartForm->ShowDialog();
+}
 };
 }

@@ -1,24 +1,21 @@
 ﻿  Auth.cpp
-D:\repos\Course-Project\Course_Project\Forms\Test_Form.h(572,41): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-D:\repos\Course-Project\Course_Project\Forms\Test_Form.h(763,41): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+D:\repos\Course-Project\Course_Project\Forms\Test_Form.h(573,41): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+D:\repos\Course-Project\Course_Project\Forms\Test_Form.h(764,41): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
 D:\repos\Course-Project\Course_Project\Forms\EditTest.h(168,13): warning C4244: 'initializing': conversion from '__int64' to 'int', possible loss of data
 D:\repos\Course-Project\Course_Project\Forms\EditTest.h(169,14): warning C4244: 'initializing': conversion from 'unsigned __int64' to 'int', possible loss of data
 D:\repos\Course-Project\Course_Project\Forms\EditTest.h(180,21): warning C4101: 'ex': unreferenced local variable
 D:\repos\Course-Project\Course_Project\Forms\EditTest.h(198,21): warning C4101: 'ex': unreferenced local variable
 D:\repos\Course-Project\Course_Project\Forms\Auth.h(97,41): warning C4566: character represented by universal-character-name '\u203B' cannot be represented in the current code page (1252)
   Main.cpp
-D:\repos\Course-Project\Course_Project\Forms\Test_Form.h(572,41): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-D:\repos\Course-Project\Course_Project\Forms\Test_Form.h(763,41): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+D:\repos\Course-Project\Course_Project\Forms\Test_Form.h(573,41): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+D:\repos\Course-Project\Course_Project\Forms\Test_Form.h(764,41): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
 D:\repos\Course-Project\Course_Project\Forms\EditTest.h(168,13): warning C4244: 'initializing': conversion from '__int64' to 'int', possible loss of data
 D:\repos\Course-Project\Course_Project\Forms\EditTest.h(169,14): warning C4244: 'initializing': conversion from 'unsigned __int64' to 'int', possible loss of data
 D:\repos\Course-Project\Course_Project\Forms\EditTest.h(180,21): warning C4101: 'ex': unreferenced local variable
 D:\repos\Course-Project\Course_Project\Forms\EditTest.h(198,21): warning C4101: 'ex': unreferenced local variable
-  Test_Form.cpp
-D:\repos\Course-Project\Course_Project\Forms\Test_Form.h(572,41): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-D:\repos\Course-Project\Course_Project\Forms\Test_Form.h(763,41): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
   Program.cpp
-D:\repos\Course-Project\Course_Project\Forms\Test_Form.h(572,41): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-D:\repos\Course-Project\Course_Project\Forms\Test_Form.h(763,41): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+D:\repos\Course-Project\Course_Project\Forms\Test_Form.h(573,41): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+D:\repos\Course-Project\Course_Project\Forms\Test_Form.h(764,41): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
 D:\repos\Course-Project\Course_Project\Forms\EditTest.h(168,13): warning C4244: 'initializing': conversion from '__int64' to 'int', possible loss of data
 D:\repos\Course-Project\Course_Project\Forms\EditTest.h(169,14): warning C4244: 'initializing': conversion from 'unsigned __int64' to 'int', possible loss of data
 D:\repos\Course-Project\Course_Project\Forms\EditTest.h(180,21): warning C4101: 'ex': unreferenced local variable

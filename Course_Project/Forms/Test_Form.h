@@ -106,7 +106,7 @@ namespace CourseProject {
 			}
 		}
 	private: System::Windows::Forms::Label^ label1;
-	private: System::Windows::Forms::Button^ Finish_Test_Button;
+
 
 	private: System::Windows::Forms::RadioButton^ Answer_Radio_1;
 	private: System::Windows::Forms::RadioButton^ Answer_Radio_2;
@@ -129,6 +129,7 @@ namespace CourseProject {
 	private: System::Windows::Forms::Timer^ timer1;
 	private: System::Windows::Forms::ProgressBar^ progressBar1;
 	private: System::Windows::Forms::Label^ label2;
+	private: System::Windows::Forms::Button^ Finish_Test_Button;
 	private: System::ComponentModel::IContainer^ components;
 
 
@@ -313,6 +314,7 @@ namespace CourseProject {
 			this->Question_Number_Label->Size = System::Drawing::Size(94, 24);
 			this->Question_Number_Label->TabIndex = 9;
 			this->Question_Number_Label->Text = L"Question";
+			this->Question_Number_Label->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 			// 
 			// Save_Test_Button
 			// 
@@ -384,7 +386,6 @@ namespace CourseProject {
 			this->progressBar1->Name = L"progressBar1";
 			this->progressBar1->Size = System::Drawing::Size(288, 19);
 			this->progressBar1->Step = 1;
-			this->progressBar1->Style = System::Windows::Forms::ProgressBarStyle::Continuous;
 			this->progressBar1->TabIndex = 16;
 			// 
 			// label2
