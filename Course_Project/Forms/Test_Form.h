@@ -612,7 +612,6 @@ namespace CourseProject {
 				if (SelectedAnswer != -1 && Answers.size())
 				{
 					tmp->IsSelectedAnswerRight = Answers[SelectedAnswer].IsTrue;
-
 				}
 				Answer_Radio_1->Checked = NextSelectedAnswer == 0 ? true : false;
 				Answer_Radio_2->Checked = NextSelectedAnswer == 1 ? true : false;

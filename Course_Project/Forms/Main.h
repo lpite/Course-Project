@@ -87,12 +87,16 @@ namespace CourseProject {
 			// 
 			// To_Test_Button
 			// 
+			this->To_Test_Button->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(192)), static_cast<System::Int32>(static_cast<System::Byte>(192)),
+				static_cast<System::Int32>(static_cast<System::Byte>(255)));
+			this->To_Test_Button->FlatAppearance->BorderSize = 0;
+			this->To_Test_Button->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->To_Test_Button->Location = System::Drawing::Point(12, 129);
 			this->To_Test_Button->Name = L"To_Test_Button";
 			this->To_Test_Button->Size = System::Drawing::Size(90, 34);
 			this->To_Test_Button->TabIndex = 0;
 			this->To_Test_Button->Text = L"Go to test";
-			this->To_Test_Button->UseVisualStyleBackColor = true;
+			this->To_Test_Button->UseVisualStyleBackColor = false;
 			this->To_Test_Button->Click += gcnew System::EventHandler(this, &Main::To_Test_Button_Click);
 			// 
 			// Greeting_Label
@@ -108,55 +112,75 @@ namespace CourseProject {
 			// 
 			// Read_Text_Button
 			// 
+			this->Read_Text_Button->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(192)),
+				static_cast<System::Int32>(static_cast<System::Byte>(192)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
+			this->Read_Text_Button->FlatAppearance->BorderSize = 0;
+			this->Read_Text_Button->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->Read_Text_Button->Location = System::Drawing::Point(12, 89);
 			this->Read_Text_Button->Name = L"Read_Text_Button";
 			this->Read_Text_Button->Size = System::Drawing::Size(90, 34);
 			this->Read_Text_Button->TabIndex = 2;
 			this->Read_Text_Button->Text = L"Read Text";
-			this->Read_Text_Button->UseVisualStyleBackColor = true;
+			this->Read_Text_Button->UseVisualStyleBackColor = false;
 			this->Read_Text_Button->Click += gcnew System::EventHandler(this, &Main::Read_Text_Button_Click);
 			// 
 			// History_Button
 			// 
+			this->History_Button->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(192)), static_cast<System::Int32>(static_cast<System::Byte>(192)),
+				static_cast<System::Int32>(static_cast<System::Byte>(255)));
+			this->History_Button->FlatAppearance->BorderSize = 0;
+			this->History_Button->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->History_Button->Location = System::Drawing::Point(12, 169);
 			this->History_Button->Name = L"History_Button";
 			this->History_Button->Size = System::Drawing::Size(90, 34);
 			this->History_Button->TabIndex = 3;
 			this->History_Button->Text = L"History";
-			this->History_Button->UseVisualStyleBackColor = true;
+			this->History_Button->UseVisualStyleBackColor = false;
 			this->History_Button->Visible = false;
 			this->History_Button->Click += gcnew System::EventHandler(this, &Main::History_Button_Click);
 			// 
 			// Edit_Test
 			// 
+			this->Edit_Test->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(192)), static_cast<System::Int32>(static_cast<System::Byte>(192)),
+				static_cast<System::Int32>(static_cast<System::Byte>(255)));
+			this->Edit_Test->FlatAppearance->BorderSize = 0;
+			this->Edit_Test->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->Edit_Test->Location = System::Drawing::Point(12, 209);
 			this->Edit_Test->Name = L"Edit_Test";
 			this->Edit_Test->Size = System::Drawing::Size(90, 34);
 			this->Edit_Test->TabIndex = 4;
 			this->Edit_Test->Text = L"Edit Test";
-			this->Edit_Test->UseVisualStyleBackColor = true;
+			this->Edit_Test->UseVisualStyleBackColor = false;
 			this->Edit_Test->Visible = false;
 			this->Edit_Test->Click += gcnew System::EventHandler(this, &Main::Edit_Test_Click);
 			// 
 			// Clear_Test_Button
 			// 
+			this->Clear_Test_Button->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(192)),
+				static_cast<System::Int32>(static_cast<System::Byte>(192)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
+			this->Clear_Test_Button->FlatAppearance->BorderSize = 0;
+			this->Clear_Test_Button->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->Clear_Test_Button->Location = System::Drawing::Point(12, 249);
 			this->Clear_Test_Button->Name = L"Clear_Test_Button";
 			this->Clear_Test_Button->Size = System::Drawing::Size(90, 34);
 			this->Clear_Test_Button->TabIndex = 5;
 			this->Clear_Test_Button->Text = L"Clear Test";
-			this->Clear_Test_Button->UseVisualStyleBackColor = true;
+			this->Clear_Test_Button->UseVisualStyleBackColor = false;
 			this->Clear_Test_Button->Visible = false;
 			this->Clear_Test_Button->Click += gcnew System::EventHandler(this, &Main::Clear_Test_Button_Click);
 			// 
 			// About_Button
 			// 
+			this->About_Button->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(192)), static_cast<System::Int32>(static_cast<System::Byte>(192)),
+				static_cast<System::Int32>(static_cast<System::Byte>(255)));
+			this->About_Button->FlatAppearance->BorderSize = 0;
+			this->About_Button->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->About_Button->Location = System::Drawing::Point(12, 289);
 			this->About_Button->Name = L"About_Button";
 			this->About_Button->Size = System::Drawing::Size(89, 34);
 			this->About_Button->TabIndex = 6;
 			this->About_Button->Text = L"About";
-			this->About_Button->UseVisualStyleBackColor = true;
+			this->About_Button->UseVisualStyleBackColor = false;
 			this->About_Button->Visible = false;
 			this->About_Button->Click += gcnew System::EventHandler(this, &Main::About_Button_Click);
 			// 

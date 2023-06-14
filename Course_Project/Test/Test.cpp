@@ -285,3 +285,4 @@ int Test::ClearHistory() {
 		return 1;
 	}
 }
+

@@ -49,7 +49,7 @@ int User::SignIn(std::string login, std::string password)
 	{
 		storage.sync_schema();
 		auto user = storage.get_all<User::USER>(where(c(&User::USER::login) == login and c(&User::USER::password) == password));
-		std::cout << "notJohn count = " << user.size() << std::endl;
+		//std::cout << "notJohn count = " << user.size() << std::endl;
 		if (user.size())
 		{
 			User::CURRENT_USER current_user{
@@ -60,7 +60,7 @@ int User::SignIn(std::string login, std::string password)
 			storage.remove_all<User::CURRENT_USER>();
 			storage.insert(current_user);
 
-			std::cout << "user = " << storage.dump(user[0]) << std::endl;
+			//std::cout << "user = " << storage.dump(user[0]) << std::endl;
 			return 0;
 		}
 		return 1;
